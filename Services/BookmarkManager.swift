@@ -3,7 +3,7 @@ import Foundation
 class BookmarkManager {
     static let shared = BookmarkManager()
     private let userDefaults = UserDefaults.standard
-    private let bookmarksKey = "VideoBackupMaster_Bookmarks"
+    private let bookmarksKey = "BackupVideo_Bookmarks"
     
     private var bookmarks: [String: Data] = [:]
     

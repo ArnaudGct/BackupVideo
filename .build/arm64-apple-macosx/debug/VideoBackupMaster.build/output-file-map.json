@@ -1,110 +1,110 @@
 {
   "": {
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/primary.swiftdeps"
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/primary.swiftdeps"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Models/BackupConfiguration.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupConfiguration.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupConfiguration.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupConfiguration~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupConfiguration.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupConfiguration.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Models/BackupConfiguration.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Models/BackupProgress.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupProgress.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupProgress.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupProgress~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupProgress.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupProgress.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Models/BackupProgress.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Models/BackupReport.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupReport.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupReport.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupReport~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupReport.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupReport.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Models/BackupReport.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Models/VideoProject.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/VideoProject.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/VideoProject.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/VideoProject~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/VideoProject.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/VideoProject.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Models/VideoProject.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Services/BookmarkManager.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BookmarkManager.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BookmarkManager.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BookmarkManager~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BookmarkManager.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BookmarkManager.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Services/BookmarkManager.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Services/FileManagerService.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/FileManagerService.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/FileManagerService.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/FileManagerService~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/FileManagerService.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/FileManagerService.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Services/FileManagerService.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Services/LoggerService.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/LoggerService.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/LoggerService.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/LoggerService~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/LoggerService.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/LoggerService.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Services/LoggerService.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/VideoBackupMasterApp.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/VideoBackupMasterApp.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/VideoBackupMasterApp.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/VideoBackupMasterApp~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/VideoBackupMasterApp.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/VideoBackupMasterApp.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/BackupVideoApp.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/ViewModels/BackupViewModel.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupViewModel.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupViewModel.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupViewModel~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupViewModel.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupViewModel.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/ViewModels/BackupViewModel.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Views/BackupReportView.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupReportView.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupReportView.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupReportView~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupReportView.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/BackupReportView.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/BackupReportView.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Views/ConfigurationZoneView.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ConfigurationZoneView.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ConfigurationZoneView.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ConfigurationZoneView~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ConfigurationZoneView.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ConfigurationZoneView.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/ConfigurationZoneView.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Views/DashboardView.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/DashboardView.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/DashboardView.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/DashboardView~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/DashboardView.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/DashboardView.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/DashboardView.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Views/ExecutionZoneView.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ExecutionZoneView.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ExecutionZoneView.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ExecutionZoneView~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ExecutionZoneView.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ExecutionZoneView.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/ExecutionZoneView.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Views/LogConsoleView.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/LogConsoleView.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/LogConsoleView.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/LogConsoleView~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/LogConsoleView.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/LogConsoleView.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/LogConsoleView.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.dia"
   },
-  "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/Views/ProjectListView.swift": {
-    "dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ProjectListView.d",
-    "object": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ProjectListView.swift.o",
-    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ProjectListView~partial.swiftmodule",
-    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ProjectListView.swiftdeps",
-    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/VideoBackupMaster/.build/arm64-apple-macosx/debug/VideoBackupMaster.build/ProjectListView.dia"
+  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/ProjectListView.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.d",
+    "object": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.dia"
   }
 }

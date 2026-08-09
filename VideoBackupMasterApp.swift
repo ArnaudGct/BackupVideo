@@ -1,11 +1,11 @@
 import SwiftUI
 
 @main
-struct VideoBackupMasterApp: App {
+struct BackupVideoApp: App {
     var body: some Scene {
         WindowGroup {
             DashboardView()
-                .navigationTitle("VideoBackupMaster")
+                .navigationTitle("BackupVideo")
         }
         // Pour macOS, permet d'avoir une fenêtre resizable proprement avec des limites
         .windowResizability(.contentMinSize)

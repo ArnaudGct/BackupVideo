@@ -2,16 +2,16 @@
 import PackageDescription
 
 let package = Package(
-    name: "VideoBackupMaster",
+    name: "BackupVideo",
     platforms: [
         .macOS(.v14)
     ],
     products: [
-        .executable(name: "VideoBackupMaster", targets: ["VideoBackupMaster"])
+        .executable(name: "BackupVideo", targets: ["BackupVideo"])
     ],
     targets: [
         .executableTarget(
-            name: "VideoBackupMaster",
+            name: "BackupVideo",
             path: ".",
             exclude: [
                 "README.md",
@@ -22,7 +22,7 @@ let package = Package(
                 "Services",
                 "ViewModels",
                 "Views",
-                "VideoBackupMasterApp.swift"
+                "BackupVideoApp.swift"
             ]
         )
     ]

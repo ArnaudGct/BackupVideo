@@ -5,13 +5,13 @@ class LoggerService {
     static let shared = LoggerService()
     
     private let logFileURL: URL
-    private let queue = DispatchQueue(label: "com.videobackupmaster.logger")
+    private let queue = DispatchQueue(label: "com.BackupVideo.logger")
     private let dateFormatter: DateFormatter
     
     private init() {
-        // Sauvegarde dans Documents/VideoBackupMaster
+        // Sauvegarde dans Documents/BackupVideo
         let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-        let appFolder = docs.appendingPathComponent("VideoBackupMaster", isDirectory: true)
+        let appFolder = docs.appendingPathComponent("BackupVideo", isDirectory: true)
         
         if !FileManager.default.fileExists(atPath: appFolder.path) {
             try? FileManager.default.createDirectory(at: appFolder, withIntermediateDirectories: true, attributes: nil)

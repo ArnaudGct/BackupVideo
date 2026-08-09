@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-APP_NAME="VideoBackupMaster"
+APP_NAME="BackupVideo"
 BUILD_DIR=".build/debug"
 APP_BUNDLE="${APP_NAME}.app"
 CONTENTS="${APP_BUNDLE}/Contents"
