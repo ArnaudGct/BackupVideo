@@ -7,6 +7,7 @@ struct VideoProject: Identifiable, Hashable {
     let projectName: String
     var totalSize: Int64 = 0
     var isSelected: Bool = true
+    var customSettings: ProjectSettings? = nil
     
     var sizeFormatted: String {
         let formatter = ByteCountFormatter()

@@ -2,6 +2,7 @@
 /Users/arnaudgct/Desktop/BackupVideo/Models/BackupConfiguration.swift
 /Users/arnaudgct/Desktop/BackupVideo/Models/BackupProgress.swift
 /Users/arnaudgct/Desktop/BackupVideo/Models/BackupReport.swift
+/Users/arnaudgct/Desktop/BackupVideo/Models/ProjectSettings.swift
 /Users/arnaudgct/Desktop/BackupVideo/Models/VideoProject.swift
 /Users/arnaudgct/Desktop/BackupVideo/Services/BookmarkManager.swift
 /Users/arnaudgct/Desktop/BackupVideo/Services/FileManagerService.swift
@@ -10,6 +11,8 @@
 /Users/arnaudgct/Desktop/BackupVideo/Views/BackupReportView.swift
 /Users/arnaudgct/Desktop/BackupVideo/Views/ConfigurationZoneView.swift
 /Users/arnaudgct/Desktop/BackupVideo/Views/DashboardView.swift
+/Users/arnaudgct/Desktop/BackupVideo/Views/DisclaimerModalView.swift
 /Users/arnaudgct/Desktop/BackupVideo/Views/ExecutionZoneView.swift
 /Users/arnaudgct/Desktop/BackupVideo/Views/LogConsoleView.swift
+/Users/arnaudgct/Desktop/BackupVideo/Views/ProjectConfigModal.swift
 /Users/arnaudgct/Desktop/BackupVideo/Views/ProjectListView.swift

@@ -30,6 +30,13 @@
     "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.swiftdeps",
     "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.dia"
   },
+  "/Users/arnaudgct/Desktop/BackupVideo/Models/ProjectSettings.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectSettings.d",
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectSettings.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectSettings~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectSettings.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectSettings.dia"
+  },
   "/Users/arnaudgct/Desktop/BackupVideo/Models/VideoProject.swift": {
     "dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.d",
     "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.swift.o",
@@ -86,6 +93,13 @@
     "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.swiftdeps",
     "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.dia"
   },
+  "/Users/arnaudgct/Desktop/BackupVideo/Views/DisclaimerModalView.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DisclaimerModalView.d",
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DisclaimerModalView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DisclaimerModalView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DisclaimerModalView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DisclaimerModalView.dia"
+  },
   "/Users/arnaudgct/Desktop/BackupVideo/Views/ExecutionZoneView.swift": {
     "dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.d",
     "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.swift.o",
@@ -99,6 +113,13 @@
     "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView~partial.swiftmodule",
     "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.swiftdeps",
     "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Views/ProjectConfigModal.swift": {
+    "dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectConfigModal.d",
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectConfigModal.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectConfigModal~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectConfigModal.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectConfigModal.dia"
   },
   "/Users/arnaudgct/Desktop/BackupVideo/Views/ProjectListView.swift": {
     "dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.d",

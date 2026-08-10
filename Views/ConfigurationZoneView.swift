@@ -7,219 +7,141 @@ enum TemplateSelection {
     case subfolder
 }
 
-struct ConfigurationZoneView: View {
-    @Bindable var viewModel: BackupViewModel
+struct InternalStructureConfigView: View {
+    @Binding var namingFormat: ProjectNamingFormat
+    @Binding var rushFolderName: String
+    @Binding var renderFolderName: String
+    @Binding var renderSubfolderName: String
+    @Binding var useRenderSubfolder: Bool
     @State private var selection: TemplateSelection = .root
     
     var body: some View {
-        HStack(alignment: .top, spacing: 20) {
-            
-            // Colonne 1 : Origine & Architecture
-            VStack(alignment: .leading, spacing: 16) {
-                Text("1. Origine & Architecture")
-                    .font(.title3)
-                    .fontWeight(.bold)
-                
-                VStack(alignment: .leading, spacing: 16) {
-                    PathRowView(title: "Vidéos en cours", url: viewModel.config.sourceURL) {
-                        viewModel.selectSourceURL()
+        VStack(alignment: .leading, spacing: 0) {
+            // Finder View (Top)
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 0) {
+                    // Column 1
+                    FinderColumn {
+                        FinderClickableRow(
+                            title: rootTitle,
+                            icon: "folder.fill",
+                            isSelected: selection == .root,
+                            showChevron: true,
+                            action: { selection = .root }
+                        )
                     }
-                    
                     Divider()
                     
-                    // Template Builder
-                    VStack(alignment: .leading, spacing: 8) {
-                        Text("Structure interne des projets")
-                            .font(.headline)
+                    // Column 2
+                    FinderColumn {
+                        FinderClickableRow(
+                            title: rushFolderName.isEmpty ? "Rushs" : rushFolderName,
+                            icon: "folder.fill",
+                            isSelected: selection == .rushs,
+                            showChevron: false,
+                            action: { selection = .rushs }
+                        )
+                        FinderClickableRow(
+                            title: renderFolderName.isEmpty ? "Rendus" : renderFolderName,
+                            icon: "folder.fill",
+                            isSelected: selection == .rendus,
+                            showChevron: useRenderSubfolder,
+                            action: { selection = .rendus }
+                        )
+                    }
+                    Divider()
+                    
+                    // Column 3
+                    if useRenderSubfolder && (selection == .rendus || selection == .subfolder) {
+                        FinderColumn {
+                            FinderClickableRow(
+                                title: renderSubfolderName.isEmpty ? "Sous-dossier" : renderSubfolderName,
+                                icon: "folder.fill",
+                                isSelected: selection == .subfolder,
+                                showChevron: false,
+                                action: { selection = .subfolder }
+                            )
+                        }
+                    } else {
+                        FinderColumn { EmptyView() }
+                    }
+                }
+            }
+            .frame(height: 120)
+            .background(Color(nsColor: .textBackgroundColor))
+            
+            Divider()
+            
+            // Inspector (Bottom)
+            VStack(alignment: .leading, spacing: 6) {
+                HStack {
+                    Text("Inspecteur :")
+                        .font(.subheadline)
+                        .fontWeight(.semibold)
+                    
+                    switch selection {
+                    case .root:
+                        Picker("", selection: $namingFormat) {
+                            Text("Client_Projet").tag(ProjectNamingFormat.client_project)
+                            Text("Client - Projet").tag(ProjectNamingFormat.clientDashProject)
+                            Text("Projet_Client").tag(ProjectNamingFormat.project_client)
+                            Text("Projet - Client").tag(ProjectNamingFormat.projectDashClient)
+                        }
+                        .pickerStyle(.menu)
+                        .labelsHidden()
                         
-                        VStack(alignment: .leading, spacing: 0) {
-                            // Finder View (Top)
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 0) {
-                                    // Column 1
-                                    FinderColumn {
-                                        FinderClickableRow(
-                                            title: rootTitle,
-                                            icon: "folder.fill",
-                                            isSelected: selection == .root,
-                                            showChevron: true,
-                                            action: { selection = .root }
-                                        )
-                                    }
-                                    Divider()
-                                    
-                                    // Column 2
-                                    FinderColumn {
-                                        FinderClickableRow(
-                                            title: viewModel.rushFolderName.isEmpty ? "Rushs" : viewModel.rushFolderName,
-                                            icon: "folder.fill",
-                                            isSelected: selection == .rushs,
-                                            showChevron: false,
-                                            action: { selection = .rushs }
-                                        )
-                                        FinderClickableRow(
-                                            title: viewModel.renderFolderName.isEmpty ? "Rendus" : viewModel.renderFolderName,
-                                            icon: "folder.fill",
-                                            isSelected: selection == .rendus,
-                                            showChevron: viewModel.useRenderSubfolder,
-                                            action: { selection = .rendus }
-                                        )
-                                    }
-                                    Divider()
-                                    
-                                    // Column 3
-                                    if viewModel.useRenderSubfolder {
-                                        FinderColumn {
-                                            FinderClickableRow(
-                                                title: viewModel.renderSubfolderName.isEmpty ? "Sous-dossier" : viewModel.renderSubfolderName,
-                                                icon: "folder.fill",
-                                                isSelected: selection == .subfolder,
-                                                showChevron: false,
-                                                action: { selection = .subfolder }
-                                            )
-                                        }
-                                    } else {
-                                        FinderColumn { EmptyView() }
-                                    }
+                    case .rushs:
+                        TextField("Nom du dossier Rushs", text: $rushFolderName)
+                            .textFieldStyle(.roundedBorder)
+                            .frame(maxWidth: 200)
+                            
+                    case .rendus:
+                        TextField("Nom du dossier Rendus", text: $renderFolderName)
+                            .textFieldStyle(.roundedBorder)
+                            .frame(maxWidth: 200)
+                        
+                        Toggle("Sous-dossier", isOn: $useRenderSubfolder)
+                            .onChange(of: useRenderSubfolder) { _, newValue in
+                                if !newValue && selection == .subfolder {
+                                    selection = .rendus
                                 }
                             }
-                            .frame(height: 120)
-                            .background(Color(nsColor: .controlBackgroundColor))
-                            
-                            Divider()
-                            
-                            // Inspector (Bottom)
-                            VStack(alignment: .leading, spacing: 12) {
-                                HStack {
-                                    Text("Inspecteur :")
-                                        .font(.subheadline)
-                                        .fontWeight(.semibold)
-                                    
-                                    switch selection {
-                                    case .root:
-                                        Picker("", selection: $viewModel.namingFormat) {
-                                            Text("Client_Projet").tag(ProjectNamingFormat.client_project)
-                                            Text("Client - Projet").tag(ProjectNamingFormat.clientDashProject)
-                                            Text("Projet_Client").tag(ProjectNamingFormat.project_client)
-                                            Text("Projet - Client").tag(ProjectNamingFormat.projectDashClient)
-                                        }
-                                        .pickerStyle(.menu)
-                                        .labelsHidden()
-                                        
-                                    case .rushs:
-                                        TextField("Nom du dossier Rushs", text: $viewModel.rushFolderName)
-                                            .textFieldStyle(.roundedBorder)
-                                            .frame(maxWidth: 200)
-                                            
-                                    case .rendus:
-                                        TextField("Nom du dossier Rendus", text: $viewModel.renderFolderName)
-                                            .textFieldStyle(.roundedBorder)
-                                            .frame(maxWidth: 200)
-                                        
-                                        Toggle("Sous-dossier", isOn: $viewModel.useRenderSubfolder)
-                                            .onChange(of: viewModel.useRenderSubfolder) { _, newValue in
-                                                if !newValue && selection == .subfolder {
-                                                    selection = .rendus
-                                                }
-                                            }
-                                            
-                                    case .subfolder:
-                                        TextField("Nom du sous-dossier", text: $viewModel.renderSubfolderName)
-                                            .textFieldStyle(.roundedBorder)
-                                            .frame(maxWidth: 200)
-                                    }
-                                }
-                            }
-                            .padding(12)
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .background(Color(nsColor: .windowBackgroundColor))
-                        }
-                        .cornerRadius(8)
-                        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(nsColor: .separatorColor), lineWidth: 1))
+                        
+                    case .subfolder:
+                        TextField("Nom du sous-dossier", text: $renderSubfolderName)
+                            .textFieldStyle(.roundedBorder)
+                            .frame(maxWidth: 200)
                     }
-                    
-                    Divider()
-                    
-                    // Projects detected list
-                    ProjectListView(viewModel: viewModel)
-                        .frame(maxHeight: .infinity)
                 }
-                .padding()
-                .background(Color(nsColor: .controlBackgroundColor))
-                .cornerRadius(10)
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(nsColor: .separatorColor), lineWidth: 1))
-            }
-            .frame(maxWidth: .infinity)
-            
-            // Colonne 2 : Destinations & Nettoyage
-            VStack(alignment: .leading, spacing: 16) {
-                Text("2. Destinations & Nettoyage")
-                    .font(.title3)
-                    .fontWeight(.bold)
                 
-                VStack(alignment: .leading, spacing: 20) {
-                    MultiPathSectionView(
-                        title: "Rendus Finaux",
-                        urls: viewModel.config.rendersDestinationURLs,
-                        isEnabled: $viewModel.enableRendersBackup,
-                        onAdd: { viewModel.addRendersDestinationURL() },
-                        onRemove: { index in viewModel.removeRendersDestinationURL(at: index) }
-                    )
+                Text(helpText)
+                    .font(.caption)
+                    .foregroundColor(.secondary)
                     
-                    MultiPathSectionView(
-                        title: "Projets Archivés",
-                        urls: viewModel.config.projectsDestinationURLs,
-                        isEnabled: $viewModel.enableProjectsBackup,
-                        onAdd: { viewModel.addProjectsDestinationURL() },
-                        onRemove: { index in viewModel.removeProjectsDestinationURL(at: index) }
-                    ) {
-                        Button(action: { viewModel.showArchiveConfigPopover = true }) {
-                            Label("Configurer", systemImage: "gear")
-                        }
-                        .popover(isPresented: $viewModel.showArchiveConfigPopover, arrowEdge: .trailing) {
-                            VStack(alignment: .leading, spacing: 12) {
-                                Text("Nettoyage de l'archive")
-                                    .font(.headline)
-                                Text("Sélectionnez les dossiers à supprimer dans la copie archivée du projet.")
-                                    .font(.caption)
-                                    .foregroundColor(.secondary)
-                                
-                                Toggle("Supprimer les Rushs", isOn: $viewModel.deleteRushsInArchive)
-                                Toggle("Supprimer les Rendus", isOn: $viewModel.deleteRendersInArchive)
-                            }
-                            .padding()
-                            .frame(width: 250)
-                        }
-                    }
-                    
-                    MultiPathSectionView(
-                        title: "Rushs",
-                        urls: viewModel.config.rushDestinationURLs,
-                        isEnabled: $viewModel.enableRushBackup,
-                        onAdd: { viewModel.addRushDestinationURL() },
-                        onRemove: { index in viewModel.removeRushDestinationURL(at: index) }
-                    )
-                    
-                    Divider()
-                    
-                    Toggle("Supprimer le projet source original après vérification", isOn: $viewModel.config.deleteOriginalProject)
-                        .tint(.red)
-                        .font(.headline)
-                        .foregroundColor(.red)
-                }
-                .padding()
-                .background(Color(nsColor: .controlBackgroundColor))
-                .cornerRadius(10)
-                .overlay(RoundedRectangle(cornerRadius: 10).stroke(Color(nsColor: .separatorColor), lineWidth: 1))
-                
-                Spacer() // Push everything to the top
             }
-            .frame(maxWidth: .infinity)
+            .padding(12)
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .background(Color(nsColor: .textBackgroundColor))
+        }
+        .cornerRadius(8)
+        .overlay(RoundedRectangle(cornerRadius: 8).stroke(Color(nsColor: .separatorColor), lineWidth: 1))
+    }
+    
+    var helpText: String {
+        switch selection {
+        case .root:
+            return "Dossier racine du projet. Choisissez le format de nom attendu pour que l'application détecte vos projets."
+        case .rushs:
+            return "C'est ici que vous stockez vos médias bruts. Assurez-vous que le nom correspond exactement à celui utilisé dans vos projets."
+        case .rendus:
+            return "Dossier destiné aux exports finaux. Renseignez son nom exact pour que l'application puisse les identifier."
+        case .subfolder:
+            return "Si vos rendus sont placés dans un sous-dossier spécifique (ex: 'Def', 'Exports'), précisez-le ici."
         }
     }
     
     var rootTitle: String {
-        switch viewModel.namingFormat {
+        switch namingFormat {
         case .client_project: return "Client_Projet"
         case .clientDashProject: return "Client - Projet"
         case .project_client: return "Projet_Client"
@@ -228,7 +150,7 @@ struct ConfigurationZoneView: View {
     }
 }
 
-// ... remaining views (FinderColumn, FinderClickableRow, PathRowView) ...
+// ... remaining views (FinderColumn, FinderClickableRow, PathRowView, MultiPathSectionView) ...
 struct FinderColumn<Content: View>: View {
     let content: Content
     
@@ -388,9 +310,11 @@ struct PathRowView<TrailingContent: View>: View {
             }
             
             VStack(alignment: .leading, spacing: 4) {
-                Text(title)
-                    .font(.subheadline)
-                    .foregroundColor((isEnabled?.wrappedValue ?? true) ? .primary : .secondary)
+                if !title.isEmpty {
+                    Text(title)
+                        .font(.subheadline)
+                        .foregroundColor((isEnabled?.wrappedValue ?? true) ? .primary : .secondary)
+                }
                 
                 if (isEnabled?.wrappedValue ?? true) {
                     Text(url?.path ?? "Aucun dossier sélectionné")

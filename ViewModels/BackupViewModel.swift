@@ -20,10 +20,10 @@ class BackupViewModel {
     var projects: [VideoProject] = []
     var progress = BackupProgress()
     
-    var rushFolderName: String = UserDefaults.standard.string(forKey: "rushFolderName") ?? "1 - Rushs" {
+    var rushFolderName: String = UserDefaults.standard.string(forKey: "rushFolderName") ?? "Rushs" {
         didSet { UserDefaults.standard.set(rushFolderName, forKey: "rushFolderName") }
     }
-    var renderFolderName: String = UserDefaults.standard.string(forKey: "renderFolderName") ?? "3 - Rendus" {
+    var renderFolderName: String = UserDefaults.standard.string(forKey: "renderFolderName") ?? "Rendus" {
         didSet { UserDefaults.standard.set(renderFolderName, forKey: "renderFolderName") }
     }
     var renderSubfolderName: String = UserDefaults.standard.string(forKey: "renderSubfolderName") ?? "Def" {
@@ -56,6 +56,23 @@ class BackupViewModel {
     }
     var enableRushBackup: Bool = UserDefaults.standard.object(forKey: "enableRushBackup") as? Bool ?? true {
         didSet { UserDefaults.standard.set(enableRushBackup, forKey: "enableRushBackup") }
+    }
+    
+    var globalSettings: ProjectSettings {
+        ProjectSettings(
+            rendersDestinationURLs: config.rendersDestinationURLs,
+            projectsDestinationURLs: config.projectsDestinationURLs,
+            rushDestinationURLs: config.rushDestinationURLs,
+            enableRendersBackup: enableRendersBackup,
+            enableProjectsBackup: enableProjectsBackup,
+            enableRushBackup: enableRushBackup,
+            deleteRushsInArchive: deleteRushsInArchive,
+            deleteRendersInArchive: deleteRendersInArchive,
+            rushFolderName: rushFolderName,
+            renderFolderName: renderFolderName,
+            renderSubfolderName: renderSubfolderName,
+            useRenderSubfolder: useRenderSubfolder
+        )
     }
     
     var showConfirmationDialog: Bool = false
@@ -182,9 +199,9 @@ class BackupViewModel {
     private func executeBackup(for selectedProjects: [VideoProject]) async {
         guard let source = await MainActor.run(resultType: URL?.self, body: { self.config.sourceURL }) else { return }
         
-        let rendersDests = await MainActor.run { self.config.rendersDestinationURLs }
-        let projectsDests = await MainActor.run { self.config.projectsDestinationURLs }
-        let rushsDests = await MainActor.run { self.config.rushDestinationURLs }
+        let rendersDests = await MainActor.run { self.globalSettings.rendersDestinationURLs }
+        let projectsDests = await MainActor.run { self.globalSettings.projectsDestinationURLs }
+        let rushsDests = await MainActor.run { self.globalSettings.rushDestinationURLs }
         
         // Start accessing all bookmarks
         _ = BookmarkManager.shared.startAccessing(url: source)
@@ -228,6 +245,7 @@ class BackupViewModel {
             var currentReport = BackupReport()
             
             for project in selectedProjects {
+                let settings = project.customSettings ?? self.globalSettings
                 var projectDestinations: [String] = []
                 var projectError: String? = nil
                 var projectSuccess = true
@@ -238,10 +256,10 @@ class BackupViewModel {
                 }
                 
                 // Etape 1: Sauvegarde des Rendus
-                if self.enableRendersBackup && !rendersDests.isEmpty {
-                    var renduSourceURL = project.url.appendingPathComponent(self.renderFolderName)
-                    if self.useRenderSubfolder && !self.renderSubfolderName.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty {
-                        renduSourceURL.appendPathComponent(self.renderSubfolderName.trimmingCharacters(in: CharacterSet.whitespaces))
+                if settings.enableRendersBackup && !rendersDests.isEmpty {
+                    var renduSourceURL = project.url.appendingPathComponent(settings.renderFolderName)
+                    if settings.useRenderSubfolder && !settings.renderSubfolderName.trimmingCharacters(in: CharacterSet.whitespaces).isEmpty {
+                        renduSourceURL.appendPathComponent(settings.renderSubfolderName.trimmingCharacters(in: CharacterSet.whitespaces))
                     }
                     
                     var isDir: ObjCBool = false
@@ -281,14 +299,14 @@ class BackupViewModel {
                             }
                         }
                     } else {
-                        let folderDesc = (self.useRenderSubfolder && !self.renderSubfolderName.isEmpty) ? "\(self.renderFolderName)/\(self.renderSubfolderName)" : self.renderFolderName
+                        let folderDesc = (settings.useRenderSubfolder && !settings.renderSubfolderName.isEmpty) ? "\(settings.renderFolderName)/\(settings.renderSubfolderName)" : settings.renderFolderName
                         await MainActor.run { self.log("⚠️ Aucun dossier '\(folderDesc)' trouvé pour \(project.projectName)", type: .warning) }
                     }
                 }
                 
                 // Etape 2: Sauvegarde des Rushs (Si activé)
-                if self.enableRushBackup && !rushsDests.isEmpty {
-                    let rushSourceURL = project.url.appendingPathComponent(self.rushFolderName)
+                if settings.enableRushBackup && !rushsDests.isEmpty {
+                    let rushSourceURL = project.url.appendingPathComponent(settings.rushFolderName)
                     var isDir: ObjCBool = false
                     if FileManager.default.fileExists(atPath: rushSourceURL.path, isDirectory: &isDir) {
                         for rushDest in rushsDests {
@@ -329,13 +347,13 @@ class BackupViewModel {
                             }
                         }
                     } else {
-                        await MainActor.run { self.log("⚠️ Aucun dossier '\(self.rushFolderName)' trouvé pour \(project.projectName)", type: .warning) }
+                        await MainActor.run { self.log("⚠️ Aucun dossier '\(settings.rushFolderName)' trouvé pour \(project.projectName)", type: .warning) }
                     }
                 }
                 
                 // Etape 3: Sauvegarde du projet entier (Archive)
                 var archSuccessGlobal = true
-                if self.enableProjectsBackup && !projectsDests.isEmpty {
+                if settings.enableProjectsBackup && !projectsDests.isEmpty {
                     for projectsDest in projectsDests {
                         let clientProjectDestURL = projectsDest.appendingPathComponent(project.clientName)
                         try? await fileManagerService.createDirectoryIfNeeded(at: clientProjectDestURL)
@@ -348,8 +366,8 @@ class BackupViewModel {
                         }
                         
                         var excludedRootFolders: [String] = []
-                        if self.deleteRushsInArchive { excludedRootFolders.append(self.rushFolderName) }
-                        if self.deleteRendersInArchive { excludedRootFolders.append(self.renderFolderName) }
+                        if settings.deleteRushsInArchive { excludedRootFolders.append(settings.rushFolderName) }
+                        if settings.deleteRendersInArchive { excludedRootFolders.append(settings.renderFolderName) }
                         
                         let sourceSize = fileManagerService.calculateSize(at: project.url, excludedRootFolders: excludedRootFolders)
                         let resolution = await handleCollision(destURL: finalProjectDestURL, sourceSize: sourceSize, itemName: "Projet \(project.projectName)", expectedMissingBytes: 0)
@@ -384,7 +402,7 @@ class BackupViewModel {
                     }
                 }
                 
-                if self.enableProjectsBackup && !archSuccessGlobal {
+                if settings.enableProjectsBackup && !archSuccessGlobal {
                     currentReport.addResult(project: project, success: false, destinations: projectDestinations, errorDescription: projectError)
                 } else if projectSuccess {
                     currentReport.addResult(project: project, success: true, destinations: projectDestinations)

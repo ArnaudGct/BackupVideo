@@ -2,9 +2,12 @@ import SwiftUI
 
 struct ProjectListView: View {
     @Bindable var viewModel: BackupViewModel
+    @State private var projectToConfigIndex: Int? = nil
     
     var body: some View {
         VStack(alignment: .leading, spacing: 8) {
+            
+            
             HStack {
                 Text("Projets détectés (\(viewModel.projects.count))")
                     .font(.headline)
@@ -18,6 +21,7 @@ struct ProjectListView: View {
                 }
                 .buttonStyle(.plain)
                 .foregroundColor(.accentColor)
+                .padding(.horizontal, 4)
                 
                 Text("|")
                     .foregroundColor(.secondary)
@@ -29,7 +33,11 @@ struct ProjectListView: View {
                 }
                 .buttonStyle(.plain)
                 .foregroundColor(.accentColor)
+                .padding(.leading, 4)
+                .padding(.trailing, 16)
             }
+            .padding(.top, 16)
+            .padding(.bottom, 8)
             
             if viewModel.projects.isEmpty {
                 VStack {
@@ -68,6 +76,17 @@ struct ProjectListView: View {
                             .padding(.vertical, 4)
                             .background(Color(nsColor: .windowBackgroundColor))
                             .cornerRadius(4)
+                        
+                        Button(action: {
+                            if let index = viewModel.projects.firstIndex(where: { $0.id == project.id }) {
+                                projectToConfigIndex = index
+                            }
+                        }) {
+                            Image(systemName: "gearshape")
+                            Text("Configurer")
+                        }
+                        .buttonStyle(.bordered)
+                        .tint((project.customSettings != nil) ? .blue : .primary)
                     }
                     .padding(.vertical, 4)
                 }
@@ -77,7 +96,20 @@ struct ProjectListView: View {
                     RoundedRectangle(cornerRadius: 8)
                         .stroke(Color(nsColor: .separatorColor), lineWidth: 1)
                 )
+                .sheet(isPresented: Binding(
+                    get: { projectToConfigIndex != nil },
+                    set: { if !$0 { projectToConfigIndex = nil } }
+                )) {
+                    if let index = projectToConfigIndex, viewModel.projects.indices.contains(index) {
+                        ProjectConfigModal(
+                            project: $viewModel.projects[index],
+                            globalSettings: viewModel.globalSettings,
+                            viewModel: viewModel
+                        )
+                    }
+                }
             }
         }
+        .padding(.horizontal, 16)
     }
 }
