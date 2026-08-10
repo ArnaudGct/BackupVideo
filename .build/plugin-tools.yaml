@@ -3,105 +3,43 @@ client:
   file-system: device-agnostic
 tools: {}
 targets:
+  "BackupVideo-arm64-apple-macosx-debug.exe": ["<BackupVideo-arm64-apple-macosx-debug.exe>"]
+  "BackupVideo-arm64-apple-macosx-debug.module": ["<BackupVideo-arm64-apple-macosx-debug.module>"]
   "PackageStructure": ["<PackageStructure>"]
-  "BackupVideo-arm64-apple-macosx-debug.exe":
-    ["<BackupVideo-arm64-apple-macosx-debug.exe>"]
-  "BackupVideo-arm64-apple-macosx-debug.module":
-    ["<BackupVideo-arm64-apple-macosx-debug.module>"]
-  "main":
-    [
-      "<BackupVideo-arm64-apple-macosx-debug.exe>",
-      "<BackupVideo-arm64-apple-macosx-debug.module>",
-    ]
-  "test":
-    [
-      "<BackupVideo-arm64-apple-macosx-debug.exe>",
-      "<BackupVideo-arm64-apple-macosx-debug.module>",
-    ]
+  "main": ["<BackupVideo-arm64-apple-macosx-debug.exe>","<BackupVideo-arm64-apple-macosx-debug.module>"]
+  "test": ["<BackupVideo-arm64-apple-macosx-debug.exe>","<BackupVideo-arm64-apple-macosx-debug.module>"]
 default: "main"
 nodes:
-  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/":
+  "/Users/arnaudgct/Desktop/BackupVideo/":
     is-directory-structure: true
-    content-exclusion-patterns: [".git", ".build"]
-  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo":
+    content-exclusion-patterns: [".git",".build"]
+  "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo":
     is-mutated: true
 commands:
-  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo-entitlement.plist":
+  "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo-entitlement.plist":
     tool: write-auxiliary-file
-    inputs: ["<entitlement-plist>", "<com.apple.security.get-task-allow>"]
-    outputs:
-      [
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo-entitlement.plist",
-      ]
-    description: "Write auxiliary file /Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo-entitlement.plist"
+    inputs: ["<entitlement-plist>","<com.apple.security.get-task-allow>"]
+    outputs: ["/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo-entitlement.plist"]
+    description: "Write auxiliary file /Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo-entitlement.plist"
 
-  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/sources":
+  "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/sources":
     tool: write-auxiliary-file
-    inputs:
-      [
-        "<sources-file-list>",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Models/BackupConfiguration.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Models/BackupProgress.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Models/BackupReport.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Models/VideoProject.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Services/BookmarkManager.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Services/FileManagerService.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Services/LoggerService.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/BackupVideoApp.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/ViewModels/BackupViewModel.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/BackupReportView.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/ConfigurationZoneView.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/DashboardView.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/ExecutionZoneView.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/LogConsoleView.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/ProjectListView.swift",
-      ]
-    outputs:
-      [
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/sources",
-      ]
-    description: "Write auxiliary file /Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/sources"
+    inputs: ["<sources-file-list>","/Users/arnaudgct/Desktop/BackupVideo/BackupVideoApp.swift","/Users/arnaudgct/Desktop/BackupVideo/Models/BackupConfiguration.swift","/Users/arnaudgct/Desktop/BackupVideo/Models/BackupProgress.swift","/Users/arnaudgct/Desktop/BackupVideo/Models/BackupReport.swift","/Users/arnaudgct/Desktop/BackupVideo/Models/VideoProject.swift","/Users/arnaudgct/Desktop/BackupVideo/Services/BookmarkManager.swift","/Users/arnaudgct/Desktop/BackupVideo/Services/FileManagerService.swift","/Users/arnaudgct/Desktop/BackupVideo/Services/LoggerService.swift","/Users/arnaudgct/Desktop/BackupVideo/ViewModels/BackupViewModel.swift","/Users/arnaudgct/Desktop/BackupVideo/Views/BackupReportView.swift","/Users/arnaudgct/Desktop/BackupVideo/Views/ConfigurationZoneView.swift","/Users/arnaudgct/Desktop/BackupVideo/Views/DashboardView.swift","/Users/arnaudgct/Desktop/BackupVideo/Views/ExecutionZoneView.swift","/Users/arnaudgct/Desktop/BackupVideo/Views/LogConsoleView.swift","/Users/arnaudgct/Desktop/BackupVideo/Views/ProjectListView.swift"]
+    outputs: ["/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/sources"]
+    description: "Write auxiliary file /Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/sources"
 
-  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.product/Objects.LinkFileList":
+  "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.product/Objects.LinkFileList":
     tool: write-auxiliary-file
-    inputs:
-      [
-        "<link-file-list>",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.swift.o",
-      ]
-    outputs:
-      [
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.product/Objects.LinkFileList",
-      ]
-    description: "Write auxiliary file /Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.product/Objects.LinkFileList"
+    inputs: ["<link-file-list>","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.swift.o"]
+    outputs: ["/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.product/Objects.LinkFileList"]
+    description: "Write auxiliary file /Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.product/Objects.LinkFileList"
 
-  "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt":
+  "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt":
     tool: write-auxiliary-file
-    inputs:
-      [
-        "<swift-get-version>",
-        "/Library/Developer/CommandLineTools/usr/bin/swiftc",
-      ]
-    outputs:
-      [
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt",
-      ]
+    inputs: ["<swift-get-version>","/Library/Developer/CommandLineTools/usr/bin/swiftc"]
+    outputs: ["/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"]
     always-out-of-date: "true"
-    description: "Write auxiliary file /Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
+    description: "Write auxiliary file /Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt"
 
   "<BackupVideo-arm64-apple-macosx-debug.exe>":
     tool: phony
@@ -110,226 +48,34 @@ commands:
 
   "<BackupVideo-arm64-apple-macosx-debug.module>":
     tool: phony
-    inputs:
-      [
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/Modules/BackupVideo.swiftmodule",
-      ]
+    inputs: ["/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/Modules/BackupVideo.swiftmodule"]
     outputs: ["<BackupVideo-arm64-apple-macosx-debug.module>"]
 
   "C.BackupVideo-arm64-apple-macosx-debug.exe":
     tool: shell
-    inputs:
-      [
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.product/Objects.LinkFileList",
-      ]
-    outputs:
-      [
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo",
-      ]
+    inputs: ["/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.product/Objects.LinkFileList"]
+    outputs: ["/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo"]
     description: "Linking ./.build/arm64-apple-macosx/debug/BackupVideo"
-    args:
-      [
-        "/Library/Developer/CommandLineTools/usr/bin/swiftc",
-        "-L",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug",
-        "-o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo",
-        "-module-name",
-        "BackupVideo",
-        "-Xlinker",
-        "-no_warn_duplicate_libraries",
-        "-emit-executable",
-        "-Xlinker",
-        "-alias",
-        "-Xlinker",
-        "_BackupVideo_main",
-        "-Xlinker",
-        "_main",
-        "-Xlinker",
-        "-rpath",
-        "-Xlinker",
-        "@loader_path",
-        "@/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.product/Objects.LinkFileList",
-        "-Xlinker",
-        "-rpath",
-        "-Xlinker",
-        "/Library/Developer/CommandLineTools/usr/lib/swift-6.2/macosx",
-        "-target",
-        "arm64-apple-macosx14.0",
-        "-Xlinker",
-        "-add_ast_path",
-        "-Xlinker",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/Modules/BackupVideo.swiftmodule",
-        "-I",
-        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
-        "-L",
-        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
-        "-plugin-path",
-        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
-        "-sdk",
-        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
-        "-g",
-      ]
+    args: ["/Library/Developer/CommandLineTools/usr/bin/swiftc","-L","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug","-o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo","-module-name","BackupVideo","-Xlinker","-no_warn_duplicate_libraries","-emit-executable","-Xlinker","-alias","-Xlinker","_BackupVideo_main","-Xlinker","_main","-Xlinker","-rpath","-Xlinker","@loader_path","@/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.product/Objects.LinkFileList","-Xlinker","-rpath","-Xlinker","/Library/Developer/CommandLineTools/usr/lib/swift-6.2/macosx","-target","arm64-apple-macosx14.0","-Xlinker","-add_ast_path","-Xlinker","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/Modules/BackupVideo.swiftmodule","-I","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-L","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-plugin-path","/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing","-sdk","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-g"]
 
   "C.BackupVideo-arm64-apple-macosx-debug.exe-entitlements":
     tool: shell
-    inputs:
-      [
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo-entitlement.plist",
-      ]
+    inputs: ["/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo-entitlement.plist"]
     outputs: ["<BackupVideo-arm64-apple-macosx-debug.exe-CodeSigning>"]
     description: "Applying debug entitlements to ./.build/arm64-apple-macosx/debug/BackupVideo"
-    args:
-      [
-        "codesign",
-        "--force",
-        "--sign",
-        "-",
-        "--entitlements",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo-entitlement.plist",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo",
-      ]
+    args: ["codesign","--force","--sign","-","--entitlements","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo-entitlement.plist","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo"]
 
   "C.BackupVideo-arm64-apple-macosx-debug.module":
     tool: shell
-    inputs:
-      [
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Models/BackupConfiguration.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Models/BackupProgress.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Models/BackupReport.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Models/VideoProject.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Services/BookmarkManager.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Services/FileManagerService.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Services/LoggerService.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/BackupVideoApp.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/ViewModels/BackupViewModel.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/BackupReportView.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/ConfigurationZoneView.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/DashboardView.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/ExecutionZoneView.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/LogConsoleView.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Views/ProjectListView.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/sources",
-      ]
-    outputs:
-      [
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.swift.o",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/Modules/BackupVideo.swiftmodule",
-      ]
+    inputs: ["/Users/arnaudgct/Desktop/BackupVideo/BackupVideoApp.swift","/Users/arnaudgct/Desktop/BackupVideo/Models/BackupConfiguration.swift","/Users/arnaudgct/Desktop/BackupVideo/Models/BackupProgress.swift","/Users/arnaudgct/Desktop/BackupVideo/Models/BackupReport.swift","/Users/arnaudgct/Desktop/BackupVideo/Models/VideoProject.swift","/Users/arnaudgct/Desktop/BackupVideo/Services/BookmarkManager.swift","/Users/arnaudgct/Desktop/BackupVideo/Services/FileManagerService.swift","/Users/arnaudgct/Desktop/BackupVideo/Services/LoggerService.swift","/Users/arnaudgct/Desktop/BackupVideo/ViewModels/BackupViewModel.swift","/Users/arnaudgct/Desktop/BackupVideo/Views/BackupReportView.swift","/Users/arnaudgct/Desktop/BackupVideo/Views/ConfigurationZoneView.swift","/Users/arnaudgct/Desktop/BackupVideo/Views/DashboardView.swift","/Users/arnaudgct/Desktop/BackupVideo/Views/ExecutionZoneView.swift","/Users/arnaudgct/Desktop/BackupVideo/Views/LogConsoleView.swift","/Users/arnaudgct/Desktop/BackupVideo/Views/ProjectListView.swift","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/swift-version--1AB21518FC5DEDBE.txt","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/sources"]
+    outputs: ["/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupVideoApp.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupConfiguration.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupProgress.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReport.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/VideoProject.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BookmarkManager.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/FileManagerService.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LoggerService.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupViewModel.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/BackupReportView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ConfigurationZoneView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/DashboardView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ExecutionZoneView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/LogConsoleView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/ProjectListView.swift.o","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/Modules/BackupVideo.swiftmodule"]
     description: "Compiling Swift Module 'BackupVideo' (15 sources)"
-    args:
-      [
-        "/Library/Developer/CommandLineTools/usr/bin/swiftc",
-        "-module-name",
-        "BackupVideo",
-        "-emit-dependencies",
-        "-emit-module",
-        "-emit-module-path",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/Modules/BackupVideo.swiftmodule",
-        "-output-file-map",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/output-file-map.json",
-        "-incremental",
-        "-c",
-        "@/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/sources",
-        "-I",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/Modules",
-        "-target",
-        "arm64-apple-macosx14.0",
-        "-incremental",
-        "-enable-batch-mode",
-        "-serialize-diagnostics",
-        "-index-store-path",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/index/store",
-        "-Onone",
-        "-enable-testing",
-        "-j16",
-        "-DSWIFT_PACKAGE",
-        "-DDEBUG",
-        "-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE",
-        "-module-cache-path",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/.build/arm64-apple-macosx/debug/ModuleCache",
-        "-parseable-output",
-        "-Xfrontend",
-        "-entry-point-function-name",
-        "-Xfrontend",
-        "BackupVideo_main",
-        "-swift-version",
-        "5",
-        "-I",
-        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
-        "-L",
-        "/Library/Developer/CommandLineTools/Library/Developer/Frameworks",
-        "-plugin-path",
-        "/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing",
-        "-sdk",
-        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
-        "-g",
-        "-Xcc",
-        "-isysroot",
-        "-Xcc",
-        "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk",
-        "-Xcc",
-        "-fPIC",
-        "-Xcc",
-        "-g",
-        "-package-name",
-        "BackupVideo",
-      ]
+    args: ["/Library/Developer/CommandLineTools/usr/bin/swiftc","-module-name","BackupVideo","-emit-dependencies","-emit-module","-emit-module-path","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/Modules/BackupVideo.swiftmodule","-output-file-map","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/output-file-map.json","-incremental","-c","@/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/BackupVideo.build/sources","-I","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/Modules","-target","arm64-apple-macosx14.0","-incremental","-enable-batch-mode","-serialize-diagnostics","-index-store-path","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/index/store","-Onone","-enable-testing","-j16","-DSWIFT_PACKAGE","-DDEBUG","-DSWIFT_MODULE_RESOURCE_BUNDLE_UNAVAILABLE","-module-cache-path","/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/debug/ModuleCache","-parseable-output","-Xfrontend","-entry-point-function-name","-Xfrontend","BackupVideo_main","-swift-version","5","-I","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-L","/Library/Developer/CommandLineTools/Library/Developer/Frameworks","-plugin-path","/Library/Developer/CommandLineTools/usr/lib/swift/host/plugins/testing","-sdk","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-g","-Xcc","-isysroot","-Xcc","/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk","-Xcc","-fPIC","-Xcc","-g","-package-name","backupvideo"]
 
   "PackageStructure":
     tool: package-structure-tool
-    inputs:
-      [
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Package.swift",
-        "/Users/arnaudgct/Desktop/FileManager/BackupVideo/Package.resolved",
-      ]
+    inputs: ["/Users/arnaudgct/Desktop/BackupVideo/","/Users/arnaudgct/Desktop/BackupVideo/Package.swift","/Users/arnaudgct/Desktop/BackupVideo/Package.resolved"]
     outputs: ["<PackageStructure>"]
     description: "Planning build"
     allow-missing-inputs: true
+

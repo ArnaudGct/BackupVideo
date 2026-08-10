@@ -58,5 +58,10 @@ struct DashboardView: View {
                 BackupReportView(viewModel: viewModel, report: report)
             }
         }
+        .alert("Erreur de sauvegarde", isPresented: $viewModel.showErrorAlert) {
+            Button("OK", role: .cancel) { }
+        } message: {
+            Text(viewModel.errorMessage)
+        }
     }
 }

@@ -85,6 +85,31 @@ struct ExecutionZoneView: View {
             } message: {
                 Text("Attention, vous avez sélectionné des options de nettoyage. Les éléments suivants seront vidés ou supprimés :\n\n" + viewModel.confirmationMessage + "\n\nVoulez-vous continuer ?")
             }
+            .alert(viewModel.collisionType == .perfectlyIdentical ? "Sauvegarde à jour ✅" : "Dossier déjà existant", isPresented: $viewModel.showCollisionDialog) {
+                if viewModel.collisionType == .perfectlyIdentical {
+                    Button("C'est tout bon ! Passer", role: .cancel) {
+                        viewModel.resolveCollision(.skip)
+                    }
+                    Button("Forcer la complétion") {
+                        viewModel.resolveCollision(.merge)
+                    }
+                    Button("Forcer le remplacement", role: .destructive) {
+                        viewModel.resolveCollision(.replace)
+                    }
+                } else {
+                    Button("Remplacer (Écrase l'ancien)", role: .destructive) {
+                        viewModel.resolveCollision(.replace)
+                    }
+                    Button("Compléter (Ajoute les manquants)") {
+                        viewModel.resolveCollision(.merge)
+                    }
+                    Button("Ignorer", role: .cancel) {
+                        viewModel.resolveCollision(.skip)
+                    }
+                }
+            } message: {
+                Text(viewModel.collisionMessage)
+            }
         }
     }
     

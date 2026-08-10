@@ -158,13 +158,21 @@ struct ConfigurationZoneView: View {
                     .fontWeight(.bold)
                 
                 VStack(alignment: .leading, spacing: 20) {
-                    PathRowView(title: "Rendus Finaux", url: viewModel.config.rendersDestinationURL, isEnabled: $viewModel.enableRendersBackup) {
-                        viewModel.selectRendersDestinationURL()
-                    }
+                    MultiPathSectionView(
+                        title: "Rendus Finaux",
+                        urls: viewModel.config.rendersDestinationURLs,
+                        isEnabled: $viewModel.enableRendersBackup,
+                        onAdd: { viewModel.addRendersDestinationURL() },
+                        onRemove: { index in viewModel.removeRendersDestinationURL(at: index) }
+                    )
                     
-                    PathRowView(title: "Projets Archivés", url: viewModel.config.projectsDestinationURL, isEnabled: $viewModel.enableProjectsBackup, action: {
-                        viewModel.selectProjectsDestinationURL()
-                    }, trailingContent: {
+                    MultiPathSectionView(
+                        title: "Projets Archivés",
+                        urls: viewModel.config.projectsDestinationURLs,
+                        isEnabled: $viewModel.enableProjectsBackup,
+                        onAdd: { viewModel.addProjectsDestinationURL() },
+                        onRemove: { index in viewModel.removeProjectsDestinationURL(at: index) }
+                    ) {
                         Button(action: { viewModel.showArchiveConfigPopover = true }) {
                             Label("Configurer", systemImage: "gear")
                         }
@@ -182,11 +190,15 @@ struct ConfigurationZoneView: View {
                             .padding()
                             .frame(width: 250)
                         }
-                    })
-                    
-                    PathRowView(title: "Rushs", url: viewModel.config.rushDestinationURL, isEnabled: $viewModel.enableRushBackup) {
-                        viewModel.selectRushDestinationURL()
                     }
+                    
+                    MultiPathSectionView(
+                        title: "Rushs",
+                        urls: viewModel.config.rushDestinationURLs,
+                        isEnabled: $viewModel.enableRushBackup,
+                        onAdd: { viewModel.addRushDestinationURL() },
+                        onRemove: { index in viewModel.removeRushDestinationURL(at: index) }
+                    )
                     
                     Divider()
                     
@@ -268,6 +280,88 @@ struct FinderClickableRow: View {
             .padding(.horizontal, 4)
         }
         .buttonStyle(.plain)
+    }
+}
+
+// Composant pour afficher et gérer plusieurs chemins de destination
+struct MultiPathSectionView<TrailingContent: View>: View {
+    let title: String
+    let urls: [URL]
+    var isEnabled: Binding<Bool>
+    let onAdd: () -> Void
+    let onRemove: (Int) -> Void
+    let trailingContent: TrailingContent
+    
+    init(title: String, urls: [URL], isEnabled: Binding<Bool>, onAdd: @escaping () -> Void, onRemove: @escaping (Int) -> Void, @ViewBuilder trailingContent: () -> TrailingContent = { EmptyView() }) {
+        self.title = title
+        self.urls = urls
+        self.isEnabled = isEnabled
+        self.onAdd = onAdd
+        self.onRemove = onRemove
+        self.trailingContent = trailingContent()
+    }
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack {
+                Toggle("", isOn: isEnabled)
+                    .labelsHidden()
+                
+                Text(title)
+                    .font(.subheadline)
+                    .foregroundColor(isEnabled.wrappedValue ? .primary : .secondary)
+                
+                Spacer()
+                
+                trailingContent
+                    .disabled(!isEnabled.wrappedValue)
+                
+                Button(action: onAdd) {
+                    Image(systemName: "folder.badge.plus")
+                    Text("Ajouter")
+                }
+                .buttonStyle(.bordered)
+                .disabled(!isEnabled.wrappedValue)
+            }
+            
+            if isEnabled.wrappedValue {
+                if urls.isEmpty {
+                    Text("Aucun dossier sélectionné")
+                        .font(.system(.body, design: .monospaced))
+                        .foregroundColor(.red)
+                        .padding(.leading, 32)
+                } else {
+                    VStack(alignment: .leading, spacing: 6) {
+                        ForEach(urls.indices, id: \.self) { index in
+                            HStack {
+                                Text(urls[index].path)
+                                    .font(.system(.body, design: .monospaced))
+                                    .lineLimit(1)
+                                    .truncationMode(.middle)
+                                    .foregroundColor(.primary)
+                                
+                                Spacer()
+                                
+                                Button(action: {
+                                    onRemove(index)
+                                }) {
+                                    Image(systemName: "minus.circle.fill")
+                                        .foregroundColor(.red)
+                                }
+                                .buttonStyle(.plain)
+                            }
+                            .padding(.leading, 32)
+                        }
+                    }
+                }
+            } else {
+                Text("Désactivé")
+                    .font(.system(.body, design: .monospaced))
+                    .foregroundColor(.secondary)
+                    .padding(.leading, 32)
+            }
+        }
+        .opacity(isEnabled.wrappedValue ? 1.0 : 0.6)
     }
 }
 

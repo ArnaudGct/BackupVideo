@@ -18,12 +18,12 @@ enum ProjectNamingFormat: String, CaseIterable, Identifiable {
 
 struct BackupConfiguration {
     var sourceURL: URL?
-    var rendersDestinationURL: URL?
-    var projectsDestinationURL: URL?
-    var rushDestinationURL: URL?
+    var rendersDestinationURLs: [URL] = []
+    var projectsDestinationURLs: [URL] = []
+    var rushDestinationURLs: [URL] = []
     var deleteOriginalProject: Bool = false
     
     var isValid: Bool {
-        sourceURL != nil && rendersDestinationURL != nil && projectsDestinationURL != nil
+        sourceURL != nil
     }
 }
