@@ -4,6 +4,7 @@ struct DashboardView: View {
     @State private var viewModel = BackupViewModel()
     @State private var showLogs: Bool = false
     @AppStorage("hasAcceptedDisclaimer") private var hasAcceptedDisclaimer = false
+    @StateObject private var updateManager = UpdateManager(repoName: "ArnaudGct/VideoBackupMaster")
     
     var body: some View {
         HSplitView {
@@ -149,6 +150,10 @@ struct DashboardView: View {
         .frame(minWidth: 1000, minHeight: 750)
         .onAppear {
             viewModel.restoreBookmarks()
+            updateManager.checkForUpdates()
+        }
+        .sheet(isPresented: $updateManager.showUpdateSheet) {
+            UpdateSheetView(updateManager: updateManager)
         }
         .sheet(isPresented: $viewModel.showReportDialog) {
             if let report = viewModel.backupReport {

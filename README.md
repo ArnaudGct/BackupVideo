@@ -35,3 +35,17 @@ Pour que l'application puisse lire et écrire dans vos dossiers, il faut configu
 2. Appuyez sur `Cmd + R` (ou le bouton Play) pour lancer l'application.
 
 L'application est prête à sécuriser vos workflows !
+
+## Étape 5 : Créer une Release (Mise à jour)
+
+Le projet intègre un système de mise à jour automatique. Pour diffuser une nouvelle version :
+1. Assurez-vous d'avoir commité vos derniers changements.
+2. Exécutez le script de release en spécifiant la version :
+   ```bash
+   ./release.sh 1.0.1
+   ```
+3. Cela va générer un fichier `BackupVideo-v1.0.1.dmg`.
+4. Allez sur votre dépôt GitHub -> **Releases** -> **Draft a new release**.
+5. Créez un tag correspondant à la version (ex: `v1.0.1` ou `1.0.1`).
+6. Uploadez le fichier `.dmg` généré.
+7. Publiez la release. Les utilisateurs recevront une notification au prochain lancement de l'application !
