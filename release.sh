@@ -51,6 +51,9 @@ cat > "$CONTENTS/Info.plist" <<EOF
 </plist>
 EOF
 
+echo "✍️ Signature ad-hoc de l'application..."
+codesign --force --deep --sign - "$APP_BUNDLE"
+
 echo "💿 Création de l'image disque (DMG)..."
 rm -rf "$DMG_STAGING"
 mkdir -p "$DMG_STAGING"

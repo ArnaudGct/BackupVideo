@@ -1,0 +1,133 @@
+{
+  "": {
+    "dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupVideo.d",
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupVideo.o",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/primary.swiftdeps"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/BackupVideoApp.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupVideoApp.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupVideoApp~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupVideoApp.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupVideoApp.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Models/BackupConfiguration.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupConfiguration.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupConfiguration~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupConfiguration.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupConfiguration.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Models/BackupProgress.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupProgress.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupProgress~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupProgress.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupProgress.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Models/BackupReport.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupReport.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupReport~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupReport.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupReport.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Models/GithubRelease.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/GithubRelease.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/GithubRelease~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/GithubRelease.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/GithubRelease.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Models/ProjectSettings.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ProjectSettings.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ProjectSettings~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ProjectSettings.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ProjectSettings.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Models/VideoProject.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/VideoProject.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/VideoProject~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/VideoProject.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/VideoProject.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Services/BookmarkManager.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BookmarkManager.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BookmarkManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BookmarkManager.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BookmarkManager.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Services/FileManagerService.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/FileManagerService.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/FileManagerService~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/FileManagerService.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/FileManagerService.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Services/LoggerService.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/LoggerService.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/LoggerService~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/LoggerService.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/LoggerService.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Services/UpdateManager.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/UpdateManager.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/UpdateManager~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/UpdateManager.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/UpdateManager.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/ViewModels/BackupViewModel.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupViewModel.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupViewModel~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupViewModel.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupViewModel.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Views/BackupReportView.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupReportView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupReportView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupReportView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/BackupReportView.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Views/ConfigurationZoneView.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ConfigurationZoneView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ConfigurationZoneView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ConfigurationZoneView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ConfigurationZoneView.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Views/DashboardView.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/DashboardView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/DashboardView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/DashboardView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/DashboardView.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Views/DisclaimerModalView.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/DisclaimerModalView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/DisclaimerModalView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/DisclaimerModalView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/DisclaimerModalView.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Views/ExecutionZoneView.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ExecutionZoneView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ExecutionZoneView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ExecutionZoneView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ExecutionZoneView.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Views/LogConsoleView.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/LogConsoleView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/LogConsoleView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/LogConsoleView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/LogConsoleView.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Views/ProjectConfigModal.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ProjectConfigModal.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ProjectConfigModal~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ProjectConfigModal.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ProjectConfigModal.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Views/ProjectListView.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ProjectListView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ProjectListView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ProjectListView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/ProjectListView.dia"
+  },
+  "/Users/arnaudgct/Desktop/BackupVideo/Views/UpdateSheetView.swift": {
+    "object": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/UpdateSheetView.swift.o",
+    "swiftmodule": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/UpdateSheetView~partial.swiftmodule",
+    "swift-dependencies": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/UpdateSheetView.swiftdeps",
+    "diagnostics": "/Users/arnaudgct/Desktop/BackupVideo/.build/arm64-apple-macosx/release/BackupVideo.build/UpdateSheetView.dia"
+  }
+}

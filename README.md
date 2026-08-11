@@ -25,3 +25,17 @@ Le projet intègre un système de mise à jour automatique. Pour diffuser une no
 6. Uploadez le fichier `.dmg` généré dans les assets de la release.
 7. Remplissez les notes de version et publiez la release.
 8. Les utilisateurs actuels recevront une notification au prochain lancement de l'application !
+
+## Dépannage : "Application endommagée" lors du téléchargement GitHub
+
+macOS intègre une protection appelée **Gatekeeper**. Lorsqu'une application n'est pas signée par un compte développeur Apple payant et qu'elle est téléchargée depuis Internet (via un navigateur), macOS lui ajoute un attribut de "quarantaine" et affiche le message : *"L'application est endommagée et doit être placée dans la corbeille."*
+
+C'est un comportement normal pour les applications open-source non signées officiellement. Pour contourner ce problème de sécurité macOS de manière fiable :
+
+1. Déplacez l'application `.app` du DMG vers votre dossier **Applications**.
+2. Ouvrez le **Terminal** (Applications > Utilitaires > Terminal).
+3. Tapez la commande suivante et appuyez sur Entrée :
+   ```bash
+   xattr -cr /Applications/BackupVideo.app
+   ```
+4. Vous pouvez maintenant lancer l'application normalement depuis le dossier Applications !
