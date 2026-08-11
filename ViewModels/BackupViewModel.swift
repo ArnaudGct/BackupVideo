@@ -81,6 +81,22 @@ class BackupViewModel {
     var backupReport: BackupReport?
     var showReportDialog: Bool = false
     
+    private var backupTask: Task<Void, Never>?
+    
+    func pauseBackup() {
+        progress.isPaused = true
+    }
+    
+    func resumeBackup() {
+        progress.isPaused = false
+    }
+    
+    func stopBackup() {
+        progress.isStopped = true
+        progress.isPaused = false
+        backupTask?.cancel()
+    }
+    
     var showCollisionDialog: Bool = false
     var collisionMessage: String = ""
     var collisionType: CollisionType = .normal
@@ -89,12 +105,31 @@ class BackupViewModel {
     var showErrorAlert: Bool = false
     var errorMessage: String = ""
     
+    var requiresConfirmation: Bool {
+        let selected = projects.filter { $0.isSelected }
+        if config.deleteOriginalProject && !selected.isEmpty { return true }
+        
+        for project in selected {
+            let settings = project.customSettings ?? globalSettings
+            if settings.enableProjectsBackup && !settings.projectsDestinationURLs.isEmpty {
+                if settings.deleteRushsInArchive || settings.deleteRendersInArchive {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
     var confirmationMessage: String {
         var items: [String] = []
-        if deleteRushsInArchive {
+        let selected = projects.filter { $0.isSelected }
+        let anyDeletesRush = selected.contains { ($0.customSettings ?? globalSettings).enableProjectsBackup && !($0.customSettings ?? globalSettings).projectsDestinationURLs.isEmpty && ($0.customSettings ?? globalSettings).deleteRushsInArchive }
+        let anyDeletesRenders = selected.contains { ($0.customSettings ?? globalSettings).enableProjectsBackup && !($0.customSettings ?? globalSettings).projectsDestinationURLs.isEmpty && ($0.customSettings ?? globalSettings).deleteRendersInArchive }
+        
+        if anyDeletesRush {
             items.append("- Le contenu des dossiers Rushs (dans l'archive)")
         }
-        if deleteRendersInArchive {
+        if anyDeletesRenders {
             items.append("- Le contenu des dossiers Rendus (dans l'archive)")
         }
         if config.deleteOriginalProject {
@@ -174,8 +209,18 @@ class BackupViewModel {
                 defer { BookmarkManager.shared.stopAccessing(url: sourceURL) }
                 
                 let format = await MainActor.run(resultType: ProjectNamingFormat.self, body: { self.namingFormat })
-                projects = try await fileManagerService.scanForProjects(at: sourceURL, format: format)
-                log("Scanner terminé : \(projects.count) projets trouvés.", type: .info)
+                var newProjects = try await fileManagerService.scanForProjects(at: sourceURL, format: format)
+                
+                await MainActor.run {
+                    for i in 0..<newProjects.count {
+                        if let existing = self.projects.first(where: { $0.url == newProjects[i].url }) {
+                            newProjects[i].isSelected = existing.isSelected
+                            newProjects[i].customSettings = existing.customSettings
+                        }
+                    }
+                    self.projects = newProjects
+                    self.log("Scanner terminé : \(self.projects.count) projets trouvés.", type: .info)
+                }
             } catch {
                 log("Erreur lors du scan : \(error.localizedDescription)", type: .error)
             }
@@ -191,12 +236,20 @@ class BackupViewModel {
         progress.completedProjects = 0
         progress.logs.removeAll()
         
-        Task.detached {
+        backupTask = Task.detached {
             await self.executeBackup(for: selectedProjects)
         }
     }
     
     private func executeBackup(for selectedProjects: [VideoProject]) async {
+        let checkPause: @Sendable () async throws -> Void = { [weak self] in
+            while await self?.progress.isPaused == true {
+                try Task.checkCancellation()
+                try await Task.sleep(nanoseconds: 500_000_000)
+            }
+            try Task.checkCancellation()
+        }
+        
         guard let source = await MainActor.run(resultType: URL?.self, body: { self.config.sourceURL }) else { return }
         
         let rendersDests = await MainActor.run { self.globalSettings.rendersDestinationURLs }
@@ -268,7 +321,7 @@ class BackupViewModel {
                             let clientRenduDestURL = renduDest.appendingPathComponent(project.clientName)
                             try? await fileManagerService.createDirectoryIfNeeded(at: clientRenduDestURL)
                             
-                            let finalRenduDestURL = clientRenduDestURL.appendingPathComponent(project.url.lastPathComponent)
+                            let finalRenduDestURL = clientRenduDestURL.appendingPathComponent(project.projectName)
                             
                             await MainActor.run { self.progress.currentItemName = "\(project.projectName) (Rendus)" }
                             let resolution = await handleCollision(destURL: finalRenduDestURL, sourceSize: fileManagerService.calculateSize(at: renduSourceURL), itemName: "Rendus de \(project.projectName)")
@@ -280,11 +333,11 @@ class BackupViewModel {
                             self.resetSpeedTracker()
                             let renduSuccess: Bool?
                             if resolution == .merge {
-                                renduSuccess = try? await fileManagerService.mergeItemAndVerify(from: renduSourceURL, to: finalRenduDestURL) { [weak self] copied, total in
+                                renduSuccess = try? await fileManagerService.mergeItemAndVerify(from: renduSourceURL, to: finalRenduDestURL, checkPause: checkPause) { [weak self] copied, total in
                                     Task { @MainActor in self?.handleProgress(copied: copied, total: total) }
                                 }
                             } else {
-                                renduSuccess = try? await fileManagerService.copyItemAndVerify(from: renduSourceURL, to: finalRenduDestURL) { [weak self] copied, total in
+                                renduSuccess = try? await fileManagerService.copyItemAndVerify(from: renduSourceURL, to: finalRenduDestURL, checkPause: checkPause) { [weak self] copied, total in
                                     Task { @MainActor in self?.handleProgress(copied: copied, total: total) }
                                 }
                             }
@@ -313,7 +366,7 @@ class BackupViewModel {
                             let clientRushDestURL = rushDest.appendingPathComponent(project.clientName)
                             try? await fileManagerService.createDirectoryIfNeeded(at: clientRushDestURL)
                             
-                            let finalRushDestURL = clientRushDestURL.appendingPathComponent(project.url.lastPathComponent)
+                            let finalRushDestURL = clientRushDestURL.appendingPathComponent(project.projectName)
                             
                             await MainActor.run { 
                                 self.progress.currentItemName = "\(project.projectName) (Rushs)"
@@ -329,11 +382,11 @@ class BackupViewModel {
                             self.resetSpeedTracker()
                             let success: Bool?
                             if resolution == .merge {
-                                success = try? await fileManagerService.mergeItemAndVerify(from: rushSourceURL, to: finalRushDestURL) { [weak self] copied, total in
+                                success = try? await fileManagerService.mergeItemAndVerify(from: rushSourceURL, to: finalRushDestURL, checkPause: checkPause) { [weak self] copied, total in
                                     Task { @MainActor in self?.handleProgress(copied: copied, total: total) }
                                 }
                             } else {
-                                success = try? await fileManagerService.copyItemAndVerify(from: rushSourceURL, to: finalRushDestURL) { [weak self] copied, total in
+                                success = try? await fileManagerService.copyItemAndVerify(from: rushSourceURL, to: finalRushDestURL, checkPause: checkPause) { [weak self] copied, total in
                                     Task { @MainActor in self?.handleProgress(copied: copied, total: total) }
                                 }
                             }
@@ -379,11 +432,11 @@ class BackupViewModel {
                         self.resetSpeedTracker()
                         let archSuccess: Bool?
                         if resolution == .merge {
-                            archSuccess = try? await fileManagerService.mergeItemAndVerify(from: project.url, to: finalProjectDestURL, excludedRootFolders: excludedRootFolders) { [weak self] copied, total in
+                            archSuccess = try? await fileManagerService.mergeItemAndVerify(from: project.url, to: finalProjectDestURL, excludedRootFolders: excludedRootFolders, checkPause: checkPause) { [weak self] copied, total in
                                 Task { @MainActor in self?.handleProgress(copied: copied, total: total) }
                             }
                         } else {
-                            archSuccess = try? await fileManagerService.copyItemAndVerify(from: project.url, to: finalProjectDestURL, excludedRootFolders: excludedRootFolders) { [weak self] copied, total in
+                            archSuccess = try? await fileManagerService.copyItemAndVerify(from: project.url, to: finalProjectDestURL, excludedRootFolders: excludedRootFolders, checkPause: checkPause) { [weak self] copied, total in
                                 Task { @MainActor in self?.handleProgress(copied: copied, total: total) }
                             }
                         }

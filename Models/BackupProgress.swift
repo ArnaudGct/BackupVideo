@@ -2,6 +2,8 @@ import Foundation
 
 struct BackupProgress {
     var isRunning: Bool = false
+    var isPaused: Bool = false
+    var isStopped: Bool = false
     var totalProjects: Int = 0
     var completedProjects: Int = 0
     var currentItemName: String = ""

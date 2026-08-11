@@ -33,7 +33,7 @@ actor FileManagerService {
             
             let sourcePathLength = url.path.count
             
-            for case let fileURL as URL in enumerator {
+            while let fileURL = enumerator.nextObject() as? URL {
                 if !excludedRootFolders.isEmpty {
                     let relativePath = String(fileURL.path.dropFirst(sourcePathLength))
                     let cleanPath = relativePath.hasPrefix("/") ? String(relativePath.dropFirst()) : relativePath
@@ -61,14 +61,14 @@ actor FileManagerService {
     }
     
     // Copier un élément et vérifier sa taille (nonisolated pour permettre le polling)
-    nonisolated func copyItemAndVerify(from sourceURL: URL, to destinationURL: URL, excludedRootFolders: [String] = [], progressCallback: @escaping @Sendable (Int64, Int64) -> Void) async throws -> Bool {
+    nonisolated func copyItemAndVerify(from sourceURL: URL, to destinationURL: URL, excludedRootFolders: [String] = [], checkPause: @escaping @Sendable () async throws -> Void = {}, progressCallback: @escaping @Sendable (Int64, Int64) -> Void) async throws -> Bool {
         if !excludedRootFolders.isEmpty {
             // Si des dossiers sont exclus, on utilise l'algorithme de fusion (qui gère l'itération) sur une destination vide
             let fileManager = FileManager.default
             if fileManager.fileExists(atPath: destinationURL.path) {
                 try fileManager.removeItem(at: destinationURL)
             }
-            return try await mergeItemAndVerify(from: sourceURL, to: destinationURL, excludedRootFolders: excludedRootFolders, progressCallback: progressCallback)
+            return try await mergeItemAndVerify(from: sourceURL, to: destinationURL, excludedRootFolders: excludedRootFolders, checkPause: checkPause, progressCallback: progressCallback)
         }
         
         let fileManager = FileManager.default
@@ -83,30 +83,11 @@ actor FileManagerService {
             try fileManager.createDirectory(at: parentURL, withIntermediateDirectories: true, attributes: nil)
         }
         
-        let sourceSize = calculateSize(at: sourceURL, excludedRootFolders: excludedRootFolders)
-        
-        let pollingTask = Task {
-            while !Task.isCancelled {
-                let destSize = self.calculateSize(at: destinationURL, excludedRootFolders: excludedRootFolders)
-                progressCallback(destSize, sourceSize)
-                try? await Task.sleep(nanoseconds: 500_000_000) // 0.5 seconde pour plus de réactivité
-            }
-        }
-        
-        try await Task.detached {
-            try fileManager.copyItem(at: sourceURL, to: destinationURL)
-        }.value
-        
-        pollingTask.cancel()
-        progressCallback(sourceSize, sourceSize)
-        
-        let destinationSize = calculateSize(at: destinationURL)
-        
-        return sourceSize == destinationSize
+        return try await mergeItemAndVerify(from: sourceURL, to: destinationURL, excludedRootFolders: excludedRootFolders, checkPause: checkPause, progressCallback: progressCallback)
     }
     
     // Fusionner deux dossiers (nonisolated pour permettre le polling)
-    nonisolated func mergeItemAndVerify(from sourceURL: URL, to destinationURL: URL, excludedRootFolders: [String] = [], progressCallback: @escaping @Sendable (Int64, Int64) -> Void) async throws -> Bool {
+    nonisolated func mergeItemAndVerify(from sourceURL: URL, to destinationURL: URL, excludedRootFolders: [String] = [], checkPause: @escaping @Sendable () async throws -> Void = {}, progressCallback: @escaping @Sendable (Int64, Int64) -> Void) async throws -> Bool {
         let fileManager = FileManager.default
         let sourceSize = calculateSize(at: sourceURL, excludedRootFolders: excludedRootFolders)
         
@@ -145,7 +126,9 @@ actor FileManagerService {
             
             let sourcePathLength = sourceURL.path.count
             
-            for case let fileURL as URL in enumerator {
+            while let fileURL = enumerator.nextObject() as? URL {
+                try Task.checkCancellation()
+                try await checkPause()
                 let relativePath = String(fileURL.path.dropFirst(sourcePathLength))
                 // On enlève le slash initial s'il y en a un
                 let cleanRelativePath = relativePath.hasPrefix("/") ? String(relativePath.dropFirst()) : relativePath
