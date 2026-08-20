@@ -9,11 +9,8 @@ struct UpdateSheetView: View {
             // Header Icon
             ZStack {
                 Circle()
-                    .fill(
-                        LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .topLeading, endPoint: .bottomTrailing)
-                    )
+                    .fill(Color.accentColor)
                     .frame(width: 80, height: 80)
-                    .shadow(color: Color.purple.opacity(0.4), radius: 10, x: 0, y: 5)
                 
                 Image(systemName: "arrow.triangle.2.circlepath")
                     .font(.system(size: 32, weight: .bold))
@@ -59,16 +56,11 @@ struct UpdateSheetView: View {
                 }) {
                     Text("Télécharger la mise à jour")
                         .font(.headline)
-                        .foregroundColor(.white)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 12)
-                        .background(
-                            LinearGradient(gradient: Gradient(colors: [Color.blue, Color.purple]), startPoint: .leading, endPoint: .trailing)
-                        )
-                        .cornerRadius(10)
-                        .shadow(color: Color.blue.opacity(0.3), radius: 5, x: 0, y: 3)
+                        .padding(.vertical, 8)
                 }
-                .buttonStyle(PlainButtonStyle())
+                .buttonStyle(.borderedProminent)
+                .controlSize(.large)
                 
                 Button(action: {
                     dismiss()
