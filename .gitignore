@@ -31,3 +31,4 @@ DerivedData/
 .swiftpm/xcode/
 Package.resolved
 
+Gemini_Generated_Image_*.png
