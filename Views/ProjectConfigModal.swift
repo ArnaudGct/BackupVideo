@@ -8,7 +8,6 @@ struct ProjectConfigModal: View {
     
     @State private var useCustomSettings: Bool = false
     @State private var localSettings: ProjectSettings
-    @State private var selectedTab: Int = 0
     
     init(project: Binding<VideoProject>, globalSettings: ProjectSettings, viewModel: BackupViewModel) {
         self._project = project
@@ -42,80 +41,48 @@ struct ProjectConfigModal: View {
             Divider()
             
             if useCustomSettings {
-                VStack(spacing: 0) {
-                    Picker("", selection: $selectedTab) {
-                        Text("Destinations & Nettoyage").tag(0)
-                        Text("Dossiers").tag(1)
-                    }
-                    .pickerStyle(.segmented)
-                    .padding(.horizontal)
-                    .padding(.top, 12)
-                    .padding(.bottom, 8)
-                    
-                    if selectedTab == 0 {
-                        ScrollView {
-                            VStack(alignment: .leading, spacing: 20) {
-                            Text("Personnalisez les emplacements de sauvegarde pour ce projet.")
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                            
-                            MultiPathSectionView(
-                                title: "Rendus Finaux",
-                                urls: localSettings.rendersDestinationURLs,
-                                isEnabled: $localSettings.enableRendersBackup,
-                                onAdd: { selectFolder(for: \.rendersDestinationURLs) },
-                                onRemove: { idx in localSettings.rendersDestinationURLs.remove(at: idx) }
-                            )
-                            
-                            MultiPathSectionView(
-                                title: "Projets Archivés",
-                                urls: localSettings.projectsDestinationURLs,
-                                isEnabled: $localSettings.enableProjectsBackup,
-                                onAdd: { selectFolder(for: \.projectsDestinationURLs) },
-                                onRemove: { idx in localSettings.projectsDestinationURLs.remove(at: idx) }
-                            ) {
-                                Button(action: { }) { Label("Nettoyage", systemImage: "trash") }
-                                    .hidden()
-                                    .overlay(
-                                        Menu {
-                                            Toggle("Supprimer les Rushs", isOn: $localSettings.deleteRushsInArchive)
-                                            Toggle("Supprimer les Rendus", isOn: $localSettings.deleteRendersInArchive)
-                                        } label: {
-                                            Label("Nettoyage", systemImage: "trash")
-                                        }
-                                        .menuIndicator(.hidden)
-                                        .fixedSize()
-                                    )
-                            }
-                            
-                            MultiPathSectionView(
-                                title: "Rushs",
-                                urls: localSettings.rushDestinationURLs,
-                                isEnabled: $localSettings.enableRushBackup,
-                                onAdd: { selectFolder(for: \.rushDestinationURLs) },
-                                onRemove: { idx in localSettings.rushDestinationURLs.remove(at: idx) }
-                            )
-                        }
-                            .padding()
-                        }
-                    } else {
-                        VStack(alignment: .leading, spacing: 20) {
-                        Text("Structure interne du projet")
-                            .font(.headline)
-                        
+                VStack(alignment: .leading, spacing: 16) {
+                    Text("Configurez l’organisation et les sauvegardes propres à ce projet.")
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+
                         InternalStructureConfigView(
                             namingFormat: .constant(viewModel.namingFormat),
                             rushFolderName: $localSettings.rushFolderName,
                             renderFolderName: $localSettings.renderFolderName,
                             renderSubfolderName: $localSettings.renderSubfolderName,
-                            useRenderSubfolder: $localSettings.useRenderSubfolder
+                            useRenderSubfolder: $localSettings.useRenderSubfolder,
+                            customCategories: $localSettings.customBackupCategories,
+                            showRendersBackup: $localSettings.showRendersBackup,
+                            showRushBackup: $localSettings.showRushBackup,
+                            rendersFolderIsBackup: $localSettings.rendersFolderIsBackup,
+                            rushFolderIsBackup: $localSettings.rushFolderIsBackup,
+                            rendersDestinationURLs: $localSettings.rendersDestinationURLs,
+                            rushDestinationURLs: $localSettings.rushDestinationURLs,
+                            projectsDestinationURLs: $localSettings.projectsDestinationURLs,
+                            enableRendersBackup: $localSettings.enableRendersBackup,
+                            enableRushBackup: $localSettings.enableRushBackup,
+                            enableProjectsBackup: $localSettings.enableProjectsBackup,
+                            deleteRushsInArchive: $localSettings.deleteRushsInArchive,
+                            deleteRendersInArchive: $localSettings.deleteRendersInArchive,
+                            onAddRendersDestination: { selectFolder(for: \.rendersDestinationURLs) },
+                            onRemoveRendersDestination: { localSettings.rendersDestinationURLs.remove(at: $0) },
+                            onAddRushDestination: { selectFolder(for: \.rushDestinationURLs) },
+                            onRemoveRushDestination: { localSettings.rushDestinationURLs.remove(at: $0) },
+                            onAddProjectsDestination: { selectFolder(for: \.projectsDestinationURLs) },
+                            onRemoveProjectsDestination: { localSettings.projectsDestinationURLs.remove(at: $0) },
+                            onAddCustomDestination: { selectFolder(forCustomCategory: $0) },
+                            onRemoveCustomDestination: { id, index in
+                                guard let categoryIndex = localSettings.customBackupCategories.firstIndex(where: { $0.id == id }),
+                                      localSettings.customBackupCategories[categoryIndex].destinationURLs.indices.contains(index) else { return }
+                                localSettings.customBackupCategories[categoryIndex].destinationURLs.remove(at: index)
+                            },
+                            onPersistConfiguration: { }
                         )
-                        
-                        Spacer()
-                    }
-                        .padding()
-                    }
+
+                    Spacer()
                 }
+                .padding()
                 .background(Color(nsColor: .textBackgroundColor))
             } else {
                 VStack {
@@ -141,6 +108,8 @@ struct ProjectConfigModal: View {
                 Button("Annuler") {
                     dismiss()
                 }
+                .buttonStyle(.bordered)
+                .controlSize(.large)
                 .keyboardShortcut(.cancelAction)
                 
                 Button("Sauvegarder") {
@@ -152,6 +121,7 @@ struct ProjectConfigModal: View {
                     dismiss()
                 }
                 .buttonStyle(.borderedProminent)
+                .controlSize(.large)
                 .keyboardShortcut(.defaultAction)
             }
             .padding()
@@ -171,4 +141,18 @@ struct ProjectConfigModal: View {
             localSettings[keyPath: keyPath].append(url)
         }
     }
+
+    private func selectFolder(forCustomCategory id: UUID) {
+        let panel = NSOpenPanel()
+        panel.canChooseFiles = false
+        panel.canChooseDirectories = true
+        panel.allowsMultipleSelection = false
+
+        if panel.runModal() == .OK, let url = panel.url,
+           let index = localSettings.customBackupCategories.firstIndex(where: { $0.id == id }),
+           !localSettings.customBackupCategories[index].destinationURLs.contains(url) {
+            localSettings.customBackupCategories[index].destinationURLs.append(url)
+        }
+    }
+
 }

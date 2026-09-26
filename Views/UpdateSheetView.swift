@@ -57,9 +57,9 @@ struct UpdateSheetView: View {
                     Text("Télécharger la mise à jour")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
+                        .padding(.vertical, 12)
                 }
-                .buttonStyle(.borderedProminent)
+                .buttonStyle(CapsuleActionButtonStyle(color: .accentColor))
                 .controlSize(.large)
                 
                 Button(action: {

@@ -1,8 +1,8 @@
 import SwiftUI
+import AppKit
 
 struct DashboardView: View {
     @State private var viewModel = BackupViewModel()
-    @State private var showLogs: Bool = false
     @AppStorage("hasAcceptedDisclaimer") private var hasAcceptedDisclaimer = false
     @StateObject private var updateManager = UpdateManager(repoName: "ArnaudGct/VideoBackupMaster")
     
@@ -13,13 +13,24 @@ struct DashboardView: View {
                 ScrollView {
                     VStack(alignment: .leading, spacing: 16) {
                         VStack(alignment: .leading, spacing: 8) {
-                            Text("Origine des vidéos")
-                                .font(.title3)
-                                .fontWeight(.bold)
-                                
-                            PathRowView(title: "", url: viewModel.config.sourceURL) {
-                                viewModel.selectSourceURL()
+                            HStack {
+                                Text("Origine des vidéos")
+                                    .font(.title3)
+                                    .fontWeight(.bold)
+
+                                Spacer()
+
+                                Button { viewModel.addSourceURL() } label: {
+                                    Label("Ajouter", systemImage: "folder.badge.plus")
+                                }
+                                .buttonStyle(.bordered)
+                                .buttonBorderShape(.capsule)
                             }
+
+                            SourcePathsView(
+                                urls: viewModel.config.sourceURLs,
+                                onRemove: { viewModel.removeSourceURL(at: $0) }
+                            )
                         }
                         
                         Divider()
@@ -31,59 +42,38 @@ struct DashboardView: View {
                             
                             GroupBox {
                             VStack(alignment: .leading, spacing: 16) {
-                                Text("Destinations & Nettoyage")
-                                    .font(.headline)
-                                
-                                MultiPathSectionView(
-                                    title: "Rendus Finaux",
-                                    urls: viewModel.config.rendersDestinationURLs,
-                                    isEnabled: $viewModel.enableRendersBackup,
-                                    onAdd: { viewModel.addRendersDestinationURL() },
-                                    onRemove: { index in viewModel.removeRendersDestinationURL(at: index) }
-                                )
-                                
-                                MultiPathSectionView(
-                                    title: "Projets Archivés",
-                                    urls: viewModel.config.projectsDestinationURLs,
-                                    isEnabled: $viewModel.enableProjectsBackup,
-                                    onAdd: { viewModel.addProjectsDestinationURL() },
-                                    onRemove: { index in viewModel.removeProjectsDestinationURL(at: index) }
-                                ) {
-                                    Button(action: { viewModel.showArchiveConfigPopover = true }) {
-                                        Label("Nettoyage", systemImage: "trash")
-                                    }
-                                    .popover(isPresented: $viewModel.showArchiveConfigPopover, arrowEdge: .trailing) {
-                                        VStack(alignment: .leading, spacing: 12) {
-                                            Text("Nettoyage de l'archive par défaut")
-                                                .font(.headline)
-                                            Toggle("Supprimer les Rushs", isOn: $viewModel.deleteRushsInArchive)
-                                            Toggle("Supprimer les Rendus", isOn: $viewModel.deleteRendersInArchive)
-                                        }
-                                        .padding()
-                                        .frame(width: 250)
-                                    }
-                                }
-                                
-                                MultiPathSectionView(
-                                    title: "Rushs",
-                                    urls: viewModel.config.rushDestinationURLs,
-                                    isEnabled: $viewModel.enableRushBackup,
-                                    onAdd: { viewModel.addRushDestinationURL() },
-                                    onRemove: { index in viewModel.removeRushDestinationURL(at: index) }
-                                )
-                                
-                                Divider()
-                                
-                                Text("Structure interne des projets")
-                                    .font(.headline)
-                                    .padding(.top, 4)
-                                    
                                 InternalStructureConfigView(
                                     namingFormat: $viewModel.namingFormat,
                                     rushFolderName: $viewModel.rushFolderName,
                                     renderFolderName: $viewModel.renderFolderName,
                                     renderSubfolderName: $viewModel.renderSubfolderName,
-                                    useRenderSubfolder: $viewModel.useRenderSubfolder
+                                    useRenderSubfolder: $viewModel.useRenderSubfolder,
+                                    customCategories: $viewModel.customBackupCategories,
+                                    showRendersBackup: $viewModel.showRendersBackup,
+                                    showRushBackup: $viewModel.showRushBackup,
+                                    rendersFolderIsBackup: $viewModel.rendersFolderIsBackup,
+                                    rushFolderIsBackup: $viewModel.rushFolderIsBackup,
+                                    rendersDestinationURLs: $viewModel.config.rendersDestinationURLs,
+                                    rushDestinationURLs: $viewModel.config.rushDestinationURLs,
+                                    projectsDestinationURLs: $viewModel.config.projectsDestinationURLs,
+                                    enableRendersBackup: $viewModel.enableRendersBackup,
+                                    enableRushBackup: $viewModel.enableRushBackup,
+                                    enableProjectsBackup: $viewModel.enableProjectsBackup,
+                                    deleteRushsInArchive: $viewModel.deleteRushsInArchive,
+                                    deleteRendersInArchive: $viewModel.deleteRendersInArchive,
+                                    onAddRendersDestination: { viewModel.addRendersDestinationURL() },
+                                    onRemoveRendersDestination: { viewModel.removeRendersDestinationURL(at: $0) },
+                                    onAddRushDestination: { viewModel.addRushDestinationURL() },
+                                    onRemoveRushDestination: { viewModel.removeRushDestinationURL(at: $0) },
+                                    onAddProjectsDestination: { viewModel.addProjectsDestinationURL() },
+                                    onRemoveProjectsDestination: { viewModel.removeProjectsDestinationURL(at: $0) },
+                                    onAddCustomDestination: { selectDestination(for: $0) },
+                                    onRemoveCustomDestination: { id, index in
+                                        guard let categoryIndex = viewModel.customBackupCategories.firstIndex(where: { $0.id == id }),
+                                              viewModel.customBackupCategories[categoryIndex].destinationURLs.indices.contains(index) else { return }
+                                        viewModel.customBackupCategories[categoryIndex].destinationURLs.remove(at: index)
+                                    },
+                                    onPersistConfiguration: { viewModel.persistBackupDestinations() }
                                 )
                                 
                                 Divider()
@@ -102,52 +92,19 @@ struct DashboardView: View {
                 
                 Divider()
                 
-                // Ligne du bas : Exécution et Logs
-                VStack(spacing: 16) {
-                    if showLogs {
-                        LogConsoleView(logs: viewModel.progress.logs)
-                            .frame(height: 150)
-                            .transition(.move(edge: .bottom).combined(with: .opacity))
-                    }
-                    
-                    VStack(spacing: 16) {
-                        ExecutionZoneView(viewModel: viewModel)
-                        
-                        HStack(spacing: 16) {
-                            Button(action: {
-                                withAnimation {
-                                    showLogs.toggle()
-                                }
-                            }) {
-                                Image(systemName: showLogs ? "list.bullet.rectangle.portrait.fill" : "list.bullet.rectangle.portrait")
-                                Text("Journal")
-                            }
-                            .buttonStyle(.bordered)
-                            .controlSize(.large)
-                            
-                            Button(action: {
-                                LoggerService.shared.openLogFile()
-                            }) {
-                                Image(systemName: "doc.text")
-                                Text("Logs")
-                            }
-                            .buttonStyle(.bordered)
-                            .controlSize(.large)
-                        }
-                    }
-                }
+                ExecutionZoneView(viewModel: viewModel)
                 .padding()
                 .background(Color(nsColor: .windowBackgroundColor))
             }
-            .frame(minWidth: 400, idealWidth: 450, maxWidth: 550)
+            .frame(minWidth: 360, idealWidth: 500, maxWidth: 1000)
             
             // Colonne de droite (Projets détectés)
             VStack(spacing: 0) {
                 ProjectListView(viewModel: viewModel)
             }
-            .frame(minWidth: 500, maxWidth: .infinity)
+            .frame(minWidth: 340, maxWidth: .infinity)
         }
-        .frame(minWidth: 1000, minHeight: 750)
+        .frame(minWidth: 850, minHeight: 750)
         .onAppear {
             viewModel.restoreBookmarks()
             updateManager.checkForUpdates()
@@ -173,4 +130,17 @@ struct DashboardView: View {
                 .interactiveDismissDisabled()
         }
     }
+
+    private func selectDestination(for categoryID: UUID) {
+        let panel = NSOpenPanel()
+        panel.canChooseDirectories = true
+        panel.canChooseFiles = false
+        panel.allowsMultipleSelection = false
+        panel.prompt = "Sélectionner"
+        guard panel.runModal() == .OK, let url = panel.url,
+              let index = viewModel.customBackupCategories.firstIndex(where: { $0.id == categoryID }),
+              !viewModel.customBackupCategories[index].destinationURLs.contains(url) else { return }
+        viewModel.customBackupCategories[index].destinationURLs.append(url)
+    }
+
 }

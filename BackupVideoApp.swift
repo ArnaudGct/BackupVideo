@@ -9,5 +9,14 @@ struct BackupVideoApp: App {
         }
         // Pour macOS, permet d'avoir une fenêtre resizable proprement avec des limites
         .windowResizability(.contentMinSize)
+        .commands {
+            CommandGroup(after: .importExport) {
+                Divider()
+                Button("Afficher les logs") {
+                    LoggerService.shared.openLogFile()
+                }
+                .keyboardShortcut("l", modifiers: [.command, .option])
+            }
+        }
     }
 }

@@ -86,6 +86,7 @@ struct ProjectListView: View {
                             Text("Configurer")
                         }
                         .buttonStyle(.bordered)
+                        .buttonBorderShape(.capsule)
                         .tint((project.customSettings != nil) ? .blue : .primary)
                     }
                     .padding(.vertical, 4)

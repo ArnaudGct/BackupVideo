@@ -1,5 +1,10 @@
 import Foundation
 
+private struct DirectorySnapshot {
+    var files = Set<String>()
+    var directories = Set<String>()
+}
+
 actor FileManagerService {
     let fileManager = FileManager.default
     
@@ -28,15 +33,13 @@ actor FileManagerService {
         guard fileManager.fileExists(atPath: url.path, isDirectory: &isDir) else { return 0 }
         
         if isDir.boolValue {
+            let normalizedURL = url.standardizedFileURL.resolvingSymlinksInPath()
             var size: Int64 = 0
-            guard let enumerator = fileManager.enumerator(at: url, includingPropertiesForKeys: [.fileSizeKey, .isDirectoryKey], options: []) else { return 0 }
-            
-            let sourcePathLength = url.path.count
+            guard let enumerator = fileManager.enumerator(at: normalizedURL, includingPropertiesForKeys: [.fileSizeKey, .isDirectoryKey], options: []) else { return 0 }
             
             while let fileURL = enumerator.nextObject() as? URL {
                 if !excludedRootFolders.isEmpty {
-                    let relativePath = String(fileURL.path.dropFirst(sourcePathLength))
-                    let cleanPath = relativePath.hasPrefix("/") ? String(relativePath.dropFirst()) : relativePath
+                    let cleanPath = relativePath(of: fileURL, from: normalizedURL)
                     
                     if excludedRootFolders.contains(where: { cleanPath == $0 || cleanPath.hasPrefix($0 + "/") }) {
                         let values = try? fileURL.resourceValues(forKeys: [.isDirectoryKey])
@@ -47,7 +50,9 @@ actor FileManagerService {
                     }
                 }
                 
-                if let values = try? fileURL.resourceValues(forKeys: [.fileSizeKey]), let fileSize = values.fileSize {
+                if let values = try? fileURL.resourceValues(forKeys: [.fileSizeKey, .isDirectoryKey]),
+                   values.isDirectory != true,
+                   let fileSize = values.fileSize {
                     size += Int64(fileSize)
                 }
             }
@@ -106,9 +111,7 @@ actor FileManagerService {
             if !isDir.boolValue {
                 // C'est un simple fichier
                 if fileManager.fileExists(atPath: destinationURL.path) {
-                    let srcValues = try? sourceURL.resourceValues(forKeys: [.fileSizeKey])
-                    let destValues = try? destinationURL.resourceValues(forKeys: [.fileSizeKey])
-                    if let sSize = srcValues?.fileSize, let dSize = destValues?.fileSize, sSize == dSize {
+                    if fileManager.contentsEqual(atPath: sourceURL.path, andPath: destinationURL.path) {
                         return // Fichier identique, on ignore
                     }
                     try fileManager.removeItem(at: destinationURL)
@@ -122,16 +125,13 @@ actor FileManagerService {
                 try fileManager.createDirectory(at: destinationURL, withIntermediateDirectories: true, attributes: nil)
             }
             
-            guard let enumerator = fileManager.enumerator(at: sourceURL, includingPropertiesForKeys: [.fileSizeKey, .isDirectoryKey], options: []) else { return }
-            
-            let sourcePathLength = sourceURL.path.count
+            let normalizedSourceURL = sourceURL.standardizedFileURL.resolvingSymlinksInPath()
+            guard let enumerator = fileManager.enumerator(at: normalizedSourceURL, includingPropertiesForKeys: [.fileSizeKey, .isDirectoryKey], options: []) else { return }
             
             while let fileURL = enumerator.nextObject() as? URL {
                 try Task.checkCancellation()
                 try await checkPause()
-                let relativePath = String(fileURL.path.dropFirst(sourcePathLength))
-                // On enlève le slash initial s'il y en a un
-                let cleanRelativePath = relativePath.hasPrefix("/") ? String(relativePath.dropFirst()) : relativePath
+                let cleanRelativePath = self.relativePath(of: fileURL, from: normalizedSourceURL)
                 let destItemURL = destinationURL.appendingPathComponent(cleanRelativePath)
                 
                 if !excludedRootFolders.isEmpty && excludedRootFolders.contains(where: { cleanRelativePath == $0 || cleanRelativePath.hasPrefix($0 + "/") }) {
@@ -153,8 +153,7 @@ actor FileManagerService {
                     }
                 } else {
                     if fileManager.fileExists(atPath: destItemURL.path) {
-                        let destValues = try? destItemURL.resourceValues(forKeys: [.fileSizeKey])
-                        if let sSize = values?.fileSize, let dSize = destValues?.fileSize, sSize == dSize {
+                        if fileManager.contentsEqual(atPath: fileURL.path, andPath: destItemURL.path) {
                             continue // Identique, on passe au suivant
                         }
                         try fileManager.removeItem(at: destItemURL)
@@ -167,7 +166,124 @@ actor FileManagerService {
         pollingTask.cancel()
         progressCallback(sourceSize, sourceSize)
         
-        return true // On suppose que si aucune erreur n'a été levée, le merge est réussi.
+        return destinationContainsVerifiedCopy(from: sourceURL, to: destinationURL, excludedRootFolders: excludedRootFolders)
+    }
+
+    /// Compare l'arborescence et le contenu réel de chaque fichier.
+    /// Les dossiers exclus de l'archive sont ignorés des deux côtés.
+    nonisolated func itemsAreEquivalent(from sourceURL: URL, to destinationURL: URL, excludedRootFolders: [String] = []) -> Bool {
+        let fileManager = FileManager.default
+        var sourceIsDirectory: ObjCBool = false
+        var destinationIsDirectory: ObjCBool = false
+
+        guard fileManager.fileExists(atPath: sourceURL.path, isDirectory: &sourceIsDirectory),
+              fileManager.fileExists(atPath: destinationURL.path, isDirectory: &destinationIsDirectory),
+              sourceIsDirectory.boolValue == destinationIsDirectory.boolValue else {
+            return false
+        }
+
+        if !sourceIsDirectory.boolValue {
+            return fileManager.contentsEqual(atPath: sourceURL.path, andPath: destinationURL.path)
+        }
+
+        guard let sourceSnapshot = directorySnapshot(at: sourceURL, excludedRootFolders: excludedRootFolders),
+              let destinationSnapshot = directorySnapshot(at: destinationURL, excludedRootFolders: excludedRootFolders),
+              sourceSnapshot.files == destinationSnapshot.files,
+              sourceSnapshot.directories == destinationSnapshot.directories else {
+            return false
+        }
+
+        return fileContentsMatch(
+            sourceURL: sourceURL,
+            destinationURL: destinationURL,
+            relativePaths: sourceSnapshot.files
+        )
+    }
+
+    /// Vérifie que tous les fichiers et dossiers sources sont présents et identiques.
+    /// Les éléments supplémentaires de la destination sont autorisés lors d'une complétion.
+    nonisolated func destinationContainsVerifiedCopy(from sourceURL: URL, to destinationURL: URL, excludedRootFolders: [String] = []) -> Bool {
+        let fileManager = FileManager.default
+        var sourceIsDirectory: ObjCBool = false
+        var destinationIsDirectory: ObjCBool = false
+
+        guard fileManager.fileExists(atPath: sourceURL.path, isDirectory: &sourceIsDirectory),
+              fileManager.fileExists(atPath: destinationURL.path, isDirectory: &destinationIsDirectory),
+              sourceIsDirectory.boolValue == destinationIsDirectory.boolValue else {
+            return false
+        }
+
+        if !sourceIsDirectory.boolValue {
+            return fileManager.contentsEqual(atPath: sourceURL.path, andPath: destinationURL.path)
+        }
+
+        guard let sourceSnapshot = directorySnapshot(at: sourceURL, excludedRootFolders: excludedRootFolders),
+              let destinationSnapshot = directorySnapshot(at: destinationURL, excludedRootFolders: excludedRootFolders),
+              sourceSnapshot.files.isSubset(of: destinationSnapshot.files),
+              sourceSnapshot.directories.isSubset(of: destinationSnapshot.directories) else {
+            return false
+        }
+
+        return fileContentsMatch(
+            sourceURL: sourceURL,
+            destinationURL: destinationURL,
+            relativePaths: sourceSnapshot.files
+        )
+    }
+
+    private nonisolated func fileContentsMatch(sourceURL: URL, destinationURL: URL, relativePaths: Set<String>) -> Bool {
+        let fileManager = FileManager.default
+        for relativePath in relativePaths {
+            let sourceFile = sourceURL.appendingPathComponent(relativePath)
+            let destinationFile = destinationURL.appendingPathComponent(relativePath)
+            if !fileManager.contentsEqual(atPath: sourceFile.path, andPath: destinationFile.path) {
+                return false
+            }
+        }
+        return true
+    }
+
+    private nonisolated func directorySnapshot(at rootURL: URL, excludedRootFolders: [String]) -> DirectorySnapshot? {
+        let fileManager = FileManager.default
+        var enumerationFailed = false
+        let normalizedRootURL = rootURL.standardizedFileURL.resolvingSymlinksInPath()
+        guard let enumerator = fileManager.enumerator(
+            at: normalizedRootURL,
+            includingPropertiesForKeys: [.isDirectoryKey],
+            options: [],
+            errorHandler: { _, _ in
+                enumerationFailed = true
+                return false
+            }
+        ) else { return nil }
+
+        var snapshot = DirectorySnapshot()
+
+        while let itemURL = enumerator.nextObject() as? URL {
+            let relativePath = relativePath(of: itemURL, from: normalizedRootURL)
+            let isExcluded = excludedRootFolders.contains { relativePath == $0 || relativePath.hasPrefix($0 + "/") }
+            let values = try? itemURL.resourceValues(forKeys: [.isDirectoryKey])
+
+            if isExcluded {
+                if values?.isDirectory == true { enumerator.skipDescendants() }
+                continue
+            }
+
+            if values?.isDirectory == true {
+                snapshot.directories.insert(relativePath)
+            } else {
+                snapshot.files.insert(relativePath)
+            }
+        }
+
+        return enumerationFailed ? nil : snapshot
+    }
+
+    private nonisolated func relativePath(of itemURL: URL, from rootURL: URL) -> String {
+        let rootComponents = rootURL.standardizedFileURL.resolvingSymlinksInPath().pathComponents
+        let itemComponents = itemURL.standardizedFileURL.resolvingSymlinksInPath().pathComponents
+        guard itemComponents.starts(with: rootComponents) else { return itemURL.lastPathComponent }
+        return itemComponents.dropFirst(rootComponents.count).joined(separator: "/")
     }
     
     // Vider le contenu d'un dossier

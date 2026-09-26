@@ -70,8 +70,7 @@ struct ExecutionZoneView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 8)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .tint(.green)
+                        .buttonStyle(CapsuleActionButtonStyle(color: .green))
                         .controlSize(.large)
                     } else {
                         Button(action: { viewModel.pauseBackup() }) {
@@ -80,8 +79,7 @@ struct ExecutionZoneView: View {
                                 .frame(maxWidth: .infinity)
                                 .padding(.vertical, 8)
                         }
-                        .buttonStyle(.borderedProminent)
-                        .tint(.yellow)
+                        .buttonStyle(CapsuleActionButtonStyle(color: .yellow, foregroundColor: .black))
                         .controlSize(.large)
                     }
                     
@@ -91,8 +89,7 @@ struct ExecutionZoneView: View {
                             .frame(maxWidth: .infinity)
                             .padding(.vertical, 8)
                     }
-                    .buttonStyle(.borderedProminent)
-                    .tint(.red)
+                    .buttonStyle(CapsuleActionButtonStyle(color: .red))
                     .controlSize(.large)
                 }
             } else {
@@ -106,10 +103,9 @@ struct ExecutionZoneView: View {
                     Text("Lancer la Sauvegarde")
                         .font(.headline)
                         .frame(maxWidth: .infinity)
-                        .padding(.vertical, 8)
+                        .padding(.vertical, 12)
                 }
-                .buttonStyle(.borderedProminent)
-                .tint(.blue)
+                .buttonStyle(CapsuleActionButtonStyle(color: .accentColor))
                 .controlSize(.large)
                 .disabled(viewModel.projects.filter { $0.isSelected }.isEmpty)
             }
@@ -120,7 +116,7 @@ struct ExecutionZoneView: View {
                     viewModel.startBackup()
                 }
             } message: {
-                Text("Attention, vous avez sélectionné des options de nettoyage. Les éléments suivants seront vidés ou supprimés :\n\n" + viewModel.confirmationMessage + "\n\nVoulez-vous continuer ?")
+                Text("Attention, vous avez sélectionné des options de nettoyage. Les éléments suivants seront exclus de l’archive ou supprimés :\n\n" + viewModel.confirmationMessage + "\n\nVoulez-vous continuer ?")
             }
             .alert(viewModel.collisionType == .perfectlyIdentical ? "Sauvegarde à jour ✅" : "Dossier déjà existant", isPresented: $viewModel.showCollisionDialog) {
                 if viewModel.collisionType == .perfectlyIdentical {

@@ -5,19 +5,24 @@ struct ProjectSettings: Equatable, Hashable {
     var rendersDestinationURLs: [URL] = []
     var projectsDestinationURLs: [URL] = []
     var rushDestinationURLs: [URL] = []
+    var customBackupCategories: [CustomBackupCategory] = []
     
     // Options de sauvegarde
     var enableRendersBackup: Bool = true
     var enableProjectsBackup: Bool = true
     var enableRushBackup: Bool = true
+    var showRendersBackup: Bool = true
+    var showRushBackup: Bool = true
+    var rendersFolderIsBackup: Bool = true
+    var rushFolderIsBackup: Bool = true
     
     // Options de nettoyage (Archive)
-    var deleteRushsInArchive: Bool = true
-    var deleteRendersInArchive: Bool = true
+    var deleteRushsInArchive: Bool = false
+    var deleteRendersInArchive: Bool = false
     
     // Architecture des dossiers
-    var rushFolderName: String = "1 - Rushs"
-    var renderFolderName: String = "3 - Rendus"
-    var renderSubfolderName: String = "Def"
-    var useRenderSubfolder: Bool = true
+    var rushFolderName: String = "Rushs"
+    var renderFolderName: String = "Rendus"
+    var renderSubfolderName: String = ""
+    var useRenderSubfolder: Bool = false
 }
